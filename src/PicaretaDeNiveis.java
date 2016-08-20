@@ -1,5 +1,5 @@
 
-public class PicaretaDeBFamilia extends Picareta{
+public class PicaretaDeNiveis extends Picareta{
 	
 	public float searchForWord(String searchWord)
 	{
