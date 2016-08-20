@@ -18,34 +18,29 @@ public class Minerador {
 	   * @param searchWord
 	   *            - The word or string that you are searching for
 	   */
-	  public void search(String url, String searchWord)
+	  public void search(String url, String searchWord, Picareta leg)
 	  {
-	      while(this.pagesVisited.size() < MAX_PAGES_TO_SEARCH)
-	      {
-	          String currentUrl;
-	          Picareta leg = new Picareta();
-	          if(this.pagesToVisit.isEmpty())
-	          {
+		  String currentUrl;
+	      while(this.pagesVisited.size() < MAX_PAGES_TO_SEARCH){
+	          if(this.pagesToVisit.isEmpty()){
 	              currentUrl = url;
 	              this.pagesVisited.add(url);
 	          }
-	          else
-	          {
+	          else{
 	              currentUrl = this.nextUrl();
 	              if(currentUrl.equals("")){
 	            	  break;
 	              }
 	          }
-	          leg.crawl(currentUrl); // Lots of stuff happening here. Look at the crawl method in
-	                                 // SpiderLeg
+	          leg.crawl(currentUrl);
 	          float success = leg.searchForWord(searchWord);
-	          if(success != -1f)
-	          {
+	          if(success != -1f){
 	              System.out.println(String.format("**Success** Word %s found at %s", searchWord, currentUrl));
 	              System.out.println("Gold = " + success);
 	              break;
 	          }
 	          this.pagesToVisit.addAll(leg.getLinks());
+	          leg.esvaziarLinks();
 	      }
 	      System.out.println("\n**Done** Visited " + this.pagesVisited.size() + " web page(s)");
 	  }
