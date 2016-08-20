@@ -1,10 +1,17 @@
 import java.util.List;
-
+/**
+ * Classe Singleton para armazenar informações necessárias a todo o sistema,
+ * garantindo assim que os dados acessados por uma classe A serão os mesmos
+ * acessados pela classe B. 
+ * @author Geovanni, Rafael, Thales 
+ *
+ */
 public final class DadosDoSistema {
 	
 	private static final DadosDoSistema dadosSis = new DadosDoSistema();
 	private List<List<Integer>> remPorNivel;
 	private List<ServidorPublico> ServidorPublicoes;
+	
 	
 	private DadosDoSistema(){
 		this.remPorNivel = null;
