@@ -3,7 +3,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
-public class Spider {
+public class Minerador {
 	  private static final int MAX_PAGES_TO_SEARCH = 10000;
 	  private Set<String> pagesVisited = new HashSet<String>();
 	  private List<String> pagesToVisit = new LinkedList<String>();
@@ -23,7 +23,7 @@ public class Spider {
 	      while(this.pagesVisited.size() < MAX_PAGES_TO_SEARCH)
 	      {
 	          String currentUrl;
-	          SpiderLeg leg = new SpiderLeg();
+	          Picareta leg = new Picareta();
 	          if(this.pagesToVisit.isEmpty())
 	          {
 	              currentUrl = url;

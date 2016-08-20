@@ -8,7 +8,7 @@ public class SpiderTest
      */
     public static void main(String[] args)
     {
-        Spider spider = new Spider();
-        spider.search("http://www.portaldatransparencia.gov.br/servidores/OrgaoLotacao-ListaServidores.asp?CodOrg=26243&Pagina=1", "Remuneração básica bruta");
+        Minerador minerador = new Minerador();
+        minerador.search("http://www.portaldatransparencia.gov.br/servidores/OrgaoLotacao-ListaServidores.asp?CodOrg=26243&Pagina=1", "Remuneração básica bruta");
     }
 }
