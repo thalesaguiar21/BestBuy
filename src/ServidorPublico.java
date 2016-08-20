@@ -6,6 +6,14 @@ public class ServidorPublico {
 	private Float remuneracao;
 	private Boolean bFamilia;
 	
+	ServidorPublico(){
+		this.nome = null;
+		this.cpf = null;
+		this.nivel = null;
+		this.remuneracao = null;
+		this.bFamilia = null;
+	}
+	
 	ServidorPublico(String nome, String cpf, Integer nivel, Float remuneracao, Boolean bFamilia){
 		this.nome = nome;
 		this.cpf = cpf;
