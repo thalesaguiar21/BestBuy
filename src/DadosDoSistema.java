@@ -4,11 +4,11 @@ public final class DadosDoSistema {
 	
 	private static final DadosDoSistema dadosSis = new DadosDoSistema();
 	private List<List<Integer>> remPorNivel;
-	private List<Servidor> servidores;
+	private List<ServidorPublico> ServidorPublicoes;
 	
 	private DadosDoSistema(){
 		this.remPorNivel = null;
-		this.servidores = null;
+		this.ServidorPublicoes = null;
 	}
 	
 	public static DadosDoSistema getDados(){
@@ -23,11 +23,11 @@ public final class DadosDoSistema {
 		this.remPorNivel = remPorNivel;
 	}
 	
-	public List<Servidor> getServidores(){
-		return this.servidores;
+	public List<ServidorPublico> getServidorPublicoes(){
+		return this.ServidorPublicoes;
 	}
 	
-	public void setServidores(List<Servidor> servidores){
-		this.servidores = servidores;
+	public void setServidorPublicoes(List<ServidorPublico> ServidorPublicoes){
+		this.ServidorPublicoes = ServidorPublicoes;
 	}
 }

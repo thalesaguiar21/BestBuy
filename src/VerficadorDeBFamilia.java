@@ -4,18 +4,18 @@ import java.util.List;
 public class VerficadorDeBFamilia implements Verificador{
 
 	@Override
-	public List<Servidor> verificar() {
-		List<Servidor> servIncoerentes = new ArrayList<Servidor>();
-		for(Servidor serv : DadosDoSistema.getDados().getServidores()){
+	public List<ServidorPublico> verificar() {
+		List<ServidorPublico> servIncoerentes = new ArrayList<ServidorPublico>();
+		for(ServidorPublico serv : DadosDoSistema.getDados().getServidorPublicoes()){
 			if(serv.getbFamilia()) servIncoerentes.add(serv);
 		}
 		return servIncoerentes;
 	}
 
 	@Override
-	public List<Servidor> verificar(String nome) {
-		List<Servidor> servIncoerentes = new ArrayList<Servidor>();
-		for(Servidor serv : DadosDoSistema.getDados().getServidores()){
+	public List<ServidorPublico> verificar(String nome) {
+		List<ServidorPublico> servIncoerentes = new ArrayList<ServidorPublico>();
+		for(ServidorPublico serv : DadosDoSistema.getDados().getServidorPublicoes()){
 			String servNome = serv.getNome().trim();
 			if(serv.getbFamilia() & servNome.equalsIgnoreCase(nome)) servIncoerentes.add(serv);
 		}
@@ -23,7 +23,7 @@ public class VerficadorDeBFamilia implements Verificador{
 	}
 
 	@Override
-	public List<Servidor> verificar(List<String> nomes) {
+	public List<ServidorPublico> verificar(List<String> nomes) {
 		return null;
 	}
 

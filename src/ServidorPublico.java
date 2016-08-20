@@ -1,12 +1,12 @@
 
-public class Servidor {
+public class ServidorPublico {
 	private String nome;
 	private String cpf;
 	private Integer nivel;
 	private Float remuneracao;
 	private Boolean bFamilia;
 	
-	Servidor(String nome, String cpf, Integer nivel, Float remuneracao, Boolean bFamilia){
+	ServidorPublico(String nome, String cpf, Integer nivel, Float remuneracao, Boolean bFamilia){
 		this.nome = nome;
 		this.cpf = cpf;
 		this.nivel = nivel;
