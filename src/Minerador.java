@@ -21,29 +21,34 @@ public class Minerador {
 	   */
 	  public void minerar(String url, String searchWord, Picareta leg)
 	  {
-		  String currentUrl;
-	      while(this.pagesVisited.size() < MAX_PAGES_TO_SEARCH){
-	          if(this.pagesToVisit.isEmpty()){
-	              currentUrl = url;
-	              this.pagesVisited.add(url);
-	          }
-	          else{
-	              currentUrl = this.nextUrl();
-	              if(currentUrl.equals("")){
-	            	  break;
-	              }
-	          }
-	          leg.crawl(currentUrl);
-	          float success = leg.searchForWord(searchWord);
-	          if(success != -1f){
-	              System.out.println(String.format("**Success** Word %s found at %s", searchWord, currentUrl));
-	              System.out.println("Gold = " + success);
-	              break;
-	          }
-	          this.pagesToVisit.addAll(leg.getLinks());
-	          leg.esvaziarLinks();
-	      }
-	      System.out.println("\n**Done** Visited " + this.pagesVisited.size() + " web page(s)");
+		  if(url != ""){
+			  String currentUrl;
+		      while(this.pagesVisited.size() < MAX_PAGES_TO_SEARCH){
+		          if(this.pagesToVisit.isEmpty()){
+		              currentUrl = url;
+		              this.pagesVisited.add(url);
+		          }
+		          else{
+		              currentUrl = this.nextUrl();
+		              if(currentUrl.equals("")){
+		            	  break;
+		              }
+		          }
+		          leg.crawl(currentUrl);
+		          float success = leg.searchForWord(searchWord);
+		          if(success != -1f){
+		              System.out.println(String.format("**Success** Word %s found at %s", searchWord, currentUrl));
+		              //System.out.println("Gold = " + success);
+		              break;
+		          }
+		          this.pagesToVisit.addAll(leg.getLinks());
+		          leg.esvaziarLinks();
+		      }
+		      System.out.println("\n**Done** Visited " + this.pagesVisited.size() + " web page(s)");
+		  }
+		  else{
+			  leg.searchForWord(searchWord);
+		  }
 	  }
 
 
