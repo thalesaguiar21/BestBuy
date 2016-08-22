@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Set;
 
 public class Minerador {
+	
 	  private static final int MAX_PAGES_TO_SEARCH = 10000;
 	  private Set<String> pagesVisited = new HashSet<String>();
 	  private List<String> pagesToVisit = new LinkedList<String>();
@@ -18,7 +19,7 @@ public class Minerador {
 	   * @param searchWord
 	   *            - The word or string that you are searching for
 	   */
-	  public void search(String url, String searchWord, Picareta leg)
+	  public void minerar(String url, String searchWord, Picareta leg)
 	  {
 		  String currentUrl;
 	      while(this.pagesVisited.size() < MAX_PAGES_TO_SEARCH){

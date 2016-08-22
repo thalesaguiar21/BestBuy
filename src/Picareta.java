@@ -9,7 +9,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 public abstract class Picareta {
-    // We'll use a fake USER_AGENT so the web server thinks the robot is a normal web browser.
+
 	protected static final String USER_AGENT =
             "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/13.0.782.112 Safari/535.1";
     protected List<String> links = new LinkedList<String>();

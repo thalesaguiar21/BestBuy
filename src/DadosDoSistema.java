@@ -1,4 +1,7 @@
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 /**
  * Classe Singleton para armazenar informações necessárias a todo o sistema,
  * garantindo assim que os dados acessados por uma classe A serão os mesmos
@@ -9,24 +12,24 @@ import java.util.List;
 public final class DadosDoSistema {
 	
 	private static final DadosDoSistema dadosSis = new DadosDoSistema();
-	private List<List<Integer>> remPorNivel;
+	private Map<Integer, ArrayList<Float>> remPorNivel;
 	private List<ServidorPublico> ServidorPublicoes;
 	
 	
 	private DadosDoSistema(){
-		this.remPorNivel = null;
-		this.ServidorPublicoes = null;
+		this.remPorNivel = new HashMap<Integer, ArrayList<Float>>();
+		this.ServidorPublicoes = new ArrayList<ServidorPublico>();
 	}
 	
 	public static DadosDoSistema getDados(){
 		return dadosSis;
 	}
 	
-	public List<List<Integer>> getRemPorNivel(){
+	public Map<Integer, ArrayList<Float>> getRemPorNivel(){
 		return this.remPorNivel;
 	}
 	
-	public void setRemPorNivel(List<List<Integer>> remPorNivel){
+	public void setRemPorNivel(Map<Integer, ArrayList<Float>> remPorNivel){
 		this.remPorNivel = remPorNivel;
 	}
 	
