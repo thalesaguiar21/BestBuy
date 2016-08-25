@@ -1,34 +1,87 @@
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 
+import org.jsoup.Connection;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
 public class PicaretaDeBFamilia extends Picareta{
-	public float searchForWord(String searchWord){
-		Integer ocorrencias = 0;
-        String caminho = "C:\\Users\\Thales\\Desktop\\pag_bolsa.csv";
-        try (BufferedReader br = new BufferedReader(new FileReader(caminho))){
-            String linhasDoArquivo = new String();
-            System.out.println("Procurando...");
-            while((linhasDoArquivo = br.readLine()) != null){
-                //System.out.println(linhasDoArquivo);
-                if(linhasDoArquivo.contains(searchWord)){
-                	ocorrencias++;
-                } 
-            }
-            if(ocorrencias > 0){
-            	System.out.println("Foram encontradas " + ocorrencias + " ocorrências de " + searchWord);
-            }
-            else{
-                System.out.println(searchWord + " não foi encontrado!");
-            }
-        }
-        catch (FileNotFoundException e){
-            e.printStackTrace();
-        }
-        catch(IOException e){
-        	System.out.println("Erro ao ler o arquivo: " + caminho);
-        }
-        return 0.0f;
+	
+	PicaretaDeBFamilia(){
+		this.baseUrl = "http://www.portaldatransparencia.gov.br/PortalTransparenciaPesquisaAcaoFavorecido.asp?Exercicio=2016&textoPesquisa=&textoPesquisaAcao=&codigoAcao=8442&codigoFuncao=08&siglaEstado=RN&codigoMunicipio=1761&Pagina=1";
 	}
+	
+	@Override
+	public boolean crawl(String url)
+    {
+        try
+        {
+            Connection connection = Jsoup.connect(url).userAgent(USER_AGENT);
+            Document htmlDocument = connection.get();
+            this.htmlDocument = htmlDocument;
+            if(connection.response().statusCode() == 200)
+            {
+                System.out.println("\n**Visiting** Received web page at " + url);
+            }
+            if(!connection.response().contentType().contains("text/html"))
+            {
+                System.out.println("**Failure** Retrieved something other than HTML");
+                return false;
+            }
+            Elements linksOnPage = htmlDocument.select("a[href]");
+            System.out.println("Found (" + linksOnPage.size() + ") links");
+            for(Element link : linksOnPage)
+            {
+            	String nextUrl = link.absUrl("href");
+            	if(nextUrl.equals("") || nextUrl.contains("codFavorecido=")
+            						  || !(nextUrl.contains("codigoAcao=8442")) 
+            						  || !(nextUrl.contains("codigoMunicipio=1761"))
+            						  || nextUrl.contains("Ordem=")){
+            		continue;
+            	}
+            	else{
+            		if(nextUrl.matches(".*Pagina=\\d#")){
+            			int pageIndex = nextUrl.lastIndexOf("=");
+            			String prefix = nextUrl.substring(0, pageIndex + 1);
+            			nextUrl = prefix + (Integer.parseInt(nextUrl.substring(pageIndex + 1, nextUrl.length() - 1)) + 1);
+            		}
+            		this.links.add(nextUrl);
+            	}
+            }
+            return true;
+        }
+        catch(IOException ioe)
+        {
+        	System.out.println(ioe); // We were not successful in our HTTP request
+            return false;
+        }
+    }
+	
+	@Override
+	public float searchForWord(String searchWord)
+	{
+	    if(this.htmlDocument.body() == null)
+	    {
+	        System.out.println("ERROR! Call crawl() before performing analysis on the document");
+	        return -1f;
+	    }
+	    System.out.println("Searching for the word " + searchWord + "...");
+	    String bodyText = this.htmlDocument.body().text();
+	    if(bodyText.contains(searchWord)){
+	    	/*int i = bodyText.indexOf(searchWord) + searchWord.length();
+	    	String str = bodyText.substring(i, i + 15);
+	    	str = str.replaceAll("[^\\d,]", "");
+	    	str = str.replace(",", ".");
+	    	System.out.println("\"" + str + "\"");
+	    	return Float.parseFloat(str);*/
+	    	System.out.println(bodyText);
+	    	return 1f;
+	    }
+	    else{
+	    	return -1f;
+	    }
+	}
+
+	
 }

@@ -19,14 +19,14 @@ public class Minerador {
 	   * @param searchWord
 	   *            - The word or string that you are searching for
 	   */
-	  public void minerar(String url, String searchWord, Picareta leg)
+	  public void minerar(String searchWord, Picareta leg)
 	  {
-		  if(url != ""){
+		  if(leg.baseUrl != ""){
 			  String currentUrl;
 		      while(this.pagesVisited.size() < MAX_PAGES_TO_SEARCH){
 		          if(this.pagesToVisit.isEmpty()){
-		              currentUrl = url;
-		              this.pagesVisited.add(url);
+		              currentUrl = leg.baseUrl;
+		              this.pagesVisited.add(leg.baseUrl);
 		          }
 		          else{
 		              currentUrl = this.nextUrl();
