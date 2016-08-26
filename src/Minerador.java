@@ -39,7 +39,7 @@ public class Minerador {
 		          if(success != -1f){
 		              System.out.println(String.format("**Success** Word %s found at %s", searchWord, currentUrl));
 		              //System.out.println("Gold = " + success);
-		              break;
+		              //break;
 		          }
 		          this.pagesToVisit.addAll(leg.getLinks());
 		          leg.esvaziarLinks();

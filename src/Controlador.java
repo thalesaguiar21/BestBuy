@@ -2,10 +2,11 @@
 public class Controlador {
 	
 	// Para PicaretaDeNiveis -> "Remuneração básica bruta"
+	// Para PicaretaDeBFamilia -> "Total no Ano (R$) " **Com o espaço mesmo
 
 	public static void main(String[] args)
     {
         Minerador minerador = new Minerador();
-        minerador.minerar("ANA MARIA GOMES", new PicaretaDeBFamilia());
+        minerador.minerar("Total no Ano (R$) ", new PicaretaDeBFamilia());
     }
 }

@@ -68,11 +68,10 @@ public class PicaretaDeBFamilia extends Picareta{
 	    System.out.println("Searching for the word " + searchWord + "...");
 	    String bodyText = this.htmlDocument.body().text();
 	    if(bodyText.contains(searchWord)){
-	    	/*int i = bodyText.indexOf(searchWord) + searchWord.length();
-	    	String str = bodyText.substring(i, i + 15);
-	    	str = str.replaceAll("[^\\d,]", "");
-	    	str = str.replace(",", ".");
-	    	return Float.parseFloat(str);*/
+	    	int i = bodyText.indexOf(searchWord) + searchWord.length();
+	    	String str = bodyText.substring(i, bodyText.length());
+	    	str = str.substring(0, str.indexOf(" Página"));
+	    	System.out.println(str);
 	    	return 1f;
 	    }
 	    else{
