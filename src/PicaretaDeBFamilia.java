@@ -36,12 +36,11 @@ public class PicaretaDeBFamilia extends Picareta{
             	String nextUrl = link.absUrl("href");
             	if(nextUrl.equals("") || nextUrl.contains("codFavorecido=")
             						  || !(nextUrl.contains("codigoAcao=8442")) 
-            						  || !(nextUrl.contains("codigoMunicipio=1761"))
-            						  || nextUrl.contains("Ordem=")){
+            						  || !(nextUrl.contains("codigoMunicipio=1761"))){
             		continue;
             	}
             	else{
-            		if(nextUrl.matches(".*Pagina=\\d#")){
+            		if(nextUrl.matches(".*Pagina=\\d*#")){
             			int pageIndex = nextUrl.lastIndexOf("=");
             			String prefix = nextUrl.substring(0, pageIndex + 1);
             			nextUrl = prefix + (Integer.parseInt(nextUrl.substring(pageIndex + 1, nextUrl.length() - 1)) + 1);
@@ -73,9 +72,7 @@ public class PicaretaDeBFamilia extends Picareta{
 	    	String str = bodyText.substring(i, i + 15);
 	    	str = str.replaceAll("[^\\d,]", "");
 	    	str = str.replace(",", ".");
-	    	System.out.println("\"" + str + "\"");
 	    	return Float.parseFloat(str);*/
-	    	System.out.println(bodyText);
 	    	return 1f;
 	    }
 	    else{
