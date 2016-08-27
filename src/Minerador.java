@@ -6,27 +6,25 @@ import java.util.Set;
 public class Minerador {
 	
 	  private static final int MAX_PAGES_TO_SEARCH = 10000;
-	  private Set<String> pagesVisited = new HashSet<String>();
-	  private List<String> pagesToVisit = new LinkedList<String>();
+	  private Set<String> pagVisitadas = new HashSet<String>();
+	  private List<String> pagParaVisitar = new LinkedList<String>();
 
 
 	  /**
-	   * Our main launching point for the Spider's functionality. Internally it creates spider legs
-	   * that make an HTTP request and parse the response (the web page).
+	   * Ponto principal das funcionalidades do Spider(Minerador). Cria as legs(Picaretas) para fazer
+	   * as requisições HTTP e analisar a página web.
 	   * 
-	   * @param url
-	   *            - The starting point of the spider
-	   * @param searchWord
-	   *            - The word or string that you are searching for
+	   * @param picareta
+	   *            - O tipo de picareta que será usado na busca
 	   */
-	  public void minerar(Picareta leg)
+	  public void minerar(Picareta picareta)
 	  {
-		  if(leg.baseUrl != ""){
+		  if(picareta.baseUrl != ""){
 			  String currentUrl;
-		      while(this.pagesVisited.size() < MAX_PAGES_TO_SEARCH){
-		          if(this.pagesToVisit.isEmpty()){
-		              currentUrl = leg.baseUrl;
-		              this.pagesVisited.add(leg.baseUrl);
+		      while(this.pagVisitadas.size() < MAX_PAGES_TO_SEARCH){
+		          if(this.pagParaVisitar.isEmpty()){
+		              currentUrl = picareta.baseUrl;
+		              this.pagVisitadas.add(picareta.baseUrl);
 		          }
 		          else{
 		              currentUrl = this.nextUrl();
@@ -34,17 +32,15 @@ public class Minerador {
 		            	  break;
 		              }
 		          }
-		          leg.crawl(currentUrl);
-		          float success = leg.searchForWord();
+		          picareta.crawl(currentUrl);
+		          float success = picareta.searchForWord();
 		          if(success != -1f){
-		              System.out.println(String.format("**Success** Word found at %s", currentUrl));
-		              //System.out.println("Gold = " + success);
-		              //break;
+		              System.out.println(String.format("**Sucesso** palavra encontrada em %s", currentUrl));
 		          }
-		          this.pagesToVisit.addAll(leg.getLinks());
-		          leg.esvaziarLinks();
+		          this.pagParaVisitar.addAll(picareta.getLinks());
+		          picareta.esvaziarLinks();
 		      }
-		      System.out.println("\n**Done** Visited " + this.pagesVisited.size() + " web page(s)");
+		      System.out.println("\n**FIm**  " + this.pagVisitadas.size() + " páginas visitada(s)");
 		  }
 	  }
 
@@ -60,12 +56,12 @@ public class Minerador {
 	      String nextUrl;
 	      do
 	      {
-	    	  if(pagesToVisit.size() == 0){
+	    	  if(pagParaVisitar.size() == 0){
 	    		  return "";
 	    	  }
-	          nextUrl = this.pagesToVisit.remove(0);
-	      } while(this.pagesVisited.contains(nextUrl));
-	      this.pagesVisited.add(nextUrl);
+	          nextUrl = this.pagParaVisitar.remove(0);
+	      } while(this.pagVisitadas.contains(nextUrl));
+	      this.pagVisitadas.add(nextUrl);
 	      return nextUrl;
 	  }
 }

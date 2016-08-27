@@ -13,23 +13,21 @@ public abstract class Picareta {
 
 
     /**
-     * This performs all the work. It makes an HTTP request, checks the response, and then gathers
-     * up all the links on the page. Perform a searchForWord after the successful crawl
+     * Responsável por fazer a requisição HTTP, checar resposta e reunir todos os links da página.
+     * Depois, faz a busca por palavras chave.
      * 
      * @param url
-     *            - The URL to visit
-     * @return whether or not the crawl was successful
+     *            - O url da página que será visitada
+     * @return Se a visita foi um sucesso ou não
      */
     public abstract boolean crawl(String url);
 
 
     /**
-     * Performs a search on the body of on the HTML document that is retrieved. This method should
-     * only be called after a successful crawl.
+     * Faz uma busca por determinadas palavras no HTML e trata a string
+     * retornando apenas o que é importante.
      * 
-     * @param searchWord
-     *            - The word or string to look for
-     * @return whether or not the word was found
+     * @return Se a palavra foi ou não encontrada
      */
     public abstract float searchForWord();
 
