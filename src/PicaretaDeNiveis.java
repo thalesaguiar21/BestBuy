@@ -22,11 +22,11 @@ public class PicaretaDeNiveis extends Picareta{
             this.htmlDocument = htmlDocument;
             if(connection.response().statusCode() == 200)
             {
-                System.out.println("\n**Visiting** Received web page at " + url);
+                System.out.println("\nVisitando... recebida a seguinte página: " + url);
             }
             if(!connection.response().contentType().contains("text/html"))
             {
-                System.out.println("**Failure** Retrieved something other than HTML");
+                System.out.println("**FALHA** algo que não é HTML foi retornado!");
                 return false;
             }
             Elements linksOnPage = htmlDocument.select("a[href]");
@@ -52,7 +52,7 @@ public class PicaretaDeNiveis extends Picareta{
         }
         catch(IOException ioe)
         {
-        	System.out.println(ioe); // We were not successful in our HTTP request
+        	System.out.println(ioe);
             return false;
         }
     }
@@ -62,11 +62,10 @@ public class PicaretaDeNiveis extends Picareta{
 	{
 	    if(this.htmlDocument.body() == null)
 	    {
-	        System.out.println("ERROR! Call crawl() before performing analysis on the document");
+	        System.out.println("**ERRO** Invoque crawl() antes de realizar a análise do documento!");
 	        return -1f;
 	    }
 	    String searchWord = "Remuneração básica bruta";
-	    System.out.println("Searching for the word " + searchWord + "...");
 	    String bodyText = this.htmlDocument.body().text();
 	    if(bodyText.contains(searchWord)){
 	    	int i = bodyText.indexOf(searchWord) + searchWord.length();
