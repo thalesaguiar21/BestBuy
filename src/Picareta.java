@@ -31,7 +31,7 @@ public abstract class Picareta {
      *            - The word or string to look for
      * @return whether or not the word was found
      */
-    public abstract float searchForWord(String searchWord);
+    public abstract float searchForWord();
 
 
     public List<String> getLinks()

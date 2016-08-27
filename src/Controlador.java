@@ -7,6 +7,6 @@ public class Controlador {
 	public static void main(String[] args)
     {
         Minerador minerador = new Minerador();
-        minerador.minerar("Total no Ano (R$) ", new PicaretaDeBFamilia());
+        minerador.minerar(new PicaretaDeBFamilia());
     }
 }

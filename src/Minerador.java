@@ -19,7 +19,7 @@ public class Minerador {
 	   * @param searchWord
 	   *            - The word or string that you are searching for
 	   */
-	  public void minerar(String searchWord, Picareta leg)
+	  public void minerar(Picareta leg)
 	  {
 		  if(leg.baseUrl != ""){
 			  String currentUrl;
@@ -35,9 +35,9 @@ public class Minerador {
 		              }
 		          }
 		          leg.crawl(currentUrl);
-		          float success = leg.searchForWord(searchWord);
+		          float success = leg.searchForWord();
 		          if(success != -1f){
-		              System.out.println(String.format("**Success** Word %s found at %s", searchWord, currentUrl));
+		              System.out.println(String.format("**Success** Word found at %s", currentUrl));
 		              //System.out.println("Gold = " + success);
 		              //break;
 		          }
@@ -45,9 +45,6 @@ public class Minerador {
 		          leg.esvaziarLinks();
 		      }
 		      System.out.println("\n**Done** Visited " + this.pagesVisited.size() + " web page(s)");
-		  }
-		  else{
-			  leg.searchForWord(searchWord);
 		  }
 	  }
 

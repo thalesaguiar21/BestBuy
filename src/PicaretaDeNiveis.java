@@ -58,13 +58,14 @@ public class PicaretaDeNiveis extends Picareta{
     }
 	
 	@Override
-	public float searchForWord(String searchWord)
+	public float searchForWord()
 	{
 	    if(this.htmlDocument.body() == null)
 	    {
 	        System.out.println("ERROR! Call crawl() before performing analysis on the document");
 	        return -1f;
 	    }
+	    String searchWord = "Remuneração básica bruta";
 	    System.out.println("Searching for the word " + searchWord + "...");
 	    String bodyText = this.htmlDocument.body().text();
 	    if(bodyText.contains(searchWord)){
