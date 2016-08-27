@@ -72,16 +72,13 @@ public class PicaretaDeBFamilia extends Picareta{
 	    	int i = bodyText.indexOf(searchWord) + searchWord.length();
 	    	String str = bodyText.substring(i, bodyText.length());
 	    	str = str.substring(0, str.indexOf(" Página"));
-	    	String[] strs = str.split(" ");
-	    	String fullName = "";
+	    	String[] strs = str.split("(?<=\\d )");
 	    	for(String s : strs){
-	    		if(s.contains("-"))	System.out.println("CPF");
-	    		else if(s.contains(",")){
-	    			System.out.println(fullName);
-	    			fullName = "";
+	    		if(s.contains(",")){
+	    			System.out.println(s.replaceAll("[\\d,.]", ""));
 	    		}
 	    		else{
-	    			fullName = (fullName == "") ? fullName.concat(s) : fullName.concat(" " + s);
+	    			System.out.println(s);
 	    		}
 	    	}
 	    	System.out.println();
