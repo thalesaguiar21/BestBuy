@@ -9,13 +9,13 @@ public abstract class DBManager {
 	protected static String adm_paswd;
 	protected Connection connection;
 	
-	abstract void openConnection();
+	public abstract void openConnection();
 	
-	abstract void closeConnection();
+	public abstract void closeConnection();
 	
-	abstract void insert();
+	public abstract void insert();
 	
-	abstract void select();
+	public abstract void select();
 	
-	abstract void update();
+	public abstract void update();
 }

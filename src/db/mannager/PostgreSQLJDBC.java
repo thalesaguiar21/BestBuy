@@ -12,7 +12,7 @@ public class PostgreSQLJDBC extends DBManager{
 	}
 
 	@Override
-	void openConnection() {
+	public void openConnection() {
 		if(connection != null){
 			System.out.println("Já exite uma conexão aberta!");
 			return;
@@ -31,7 +31,7 @@ public class PostgreSQLJDBC extends DBManager{
 	}
 
 	@Override
-	void closeConnection() {
+	public void closeConnection() {
 		if(connection == null){
 			System.out.println("Não conexões estabelecidas!");
 			return;
@@ -47,19 +47,19 @@ public class PostgreSQLJDBC extends DBManager{
 	}
 
 	@Override
-	void insert() {
+	public void insert() {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	void select() {
+	public void select() {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	void update() {
+	public void update() {
 		// TODO Auto-generated method stub
 		
 	}
