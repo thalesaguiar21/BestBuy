@@ -11,6 +11,11 @@ public class BolsaFamilia {
 	private String nome;
 	private String cpf;
 	
+	/**
+	 * Cria um novo beneficiado de nome 'nome' e cpf 'cpf'
+	 * @param nome
+	 * @param cpf
+	 */
 	public BolsaFamilia(String nome, String cpf) {
 		this.nome = nome;
 		this.cpf = cpf;

@@ -9,7 +9,8 @@ import java.util.Set;
 
 /**
  * Classe criada para representar as intituicoes públicas dentro do projeto,
- * além disso, representa também a tabela de mesmo nome no banco de dados.
+ * além disso, representa também a tabela de mesmo nome no banco de dados. 
+ * Possui um nome, um HashMap de remunerações e uma lista de servidores.
  *
  * @author Thales
  *
@@ -17,7 +18,7 @@ import java.util.Set;
 public class Instituicao {
 	
 	private String nome;
-	private Map<Integer, Double> remuneracoes;
+	private Map<Integer, Double> remuneracoes;	// Representação da tabela Remunerações
 	private List<ServidorPublico> servidores;
 	
 	/**
@@ -50,7 +51,6 @@ public class Instituicao {
 		}else
 			System.out.println("Não foi possívell adicionar, lista de servidores vazia!");
 	}
-	
 	
 	/**
 	 * Adiona uma nova remuneração de nível 'nivel' e remuneração 'rem'.
