@@ -1,4 +1,4 @@
-package Geral;
+package db.mannager;
 
 public class ServidorPublico {
 	private String nome;

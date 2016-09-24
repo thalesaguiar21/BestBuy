@@ -1,6 +1,8 @@
 package Geral;
 import java.util.List;
 
+import db.mannager.ServidorPublico;
+
 public class VerificadorDeNiveis implements Verificador{
 
 	@Override

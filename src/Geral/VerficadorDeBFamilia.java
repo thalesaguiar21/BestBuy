@@ -2,6 +2,8 @@ package Geral;
 import java.util.ArrayList;
 import java.util.List;
 
+import db.mannager.ServidorPublico;
+
 public class VerficadorDeBFamilia implements Verificador{
 
 	@Override

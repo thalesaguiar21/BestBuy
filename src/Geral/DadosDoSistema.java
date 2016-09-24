@@ -3,6 +3,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import db.mannager.ServidorPublico;
 /**
  * Classe Singleton para armazenar informações necessárias a todo o sistema,
  * garantindo assim que os dados acessados por uma classe A serão os mesmos
