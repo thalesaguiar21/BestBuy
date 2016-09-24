@@ -1,5 +1,11 @@
 package db.mannager;
 
+/**
+ * Classe criada para representar dentro do projeto a tabela de BolsaFamilia,
+ * a qual armazena os nomes e cpfs dos beneficiados.
+ * @author Thales
+ *
+ */
 public class BolsaFamilia {
 	
 	private String nome;
