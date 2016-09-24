@@ -6,6 +6,7 @@ package testesjunit;
 import static org.junit.Assert.*;
 
 import org.junit.Test;
+
 import Geral.Minerador;
 import Geral.Picareta;
 
