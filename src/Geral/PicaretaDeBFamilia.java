@@ -9,6 +9,8 @@ import org.jsoup.select.Elements;
 
 public class PicaretaDeBFamilia extends Picareta{
 	
+	int cont = 0;
+	
 	public PicaretaDeBFamilia(){
 		this.setBaseUrl("http://www.portaldatransparencia.gov.br/PortalTransparenciaPesquisaAcaoFavorecido.asp?Exercicio=2016&textoPesquisa=&textoPesquisaAcao=&codigoAcao=8442&codigoFuncao=08&siglaEstado=RN&codigoMunicipio=1761&Pagina=1");
 	}
@@ -54,7 +56,17 @@ public class PicaretaDeBFamilia extends Picareta{
         catch(IOException ioe)
         {
         	System.out.println(ioe);
-            return false;
+        	System.out.println("Tentando novamente");
+        	cont++;
+        	if(cont >= 5){
+        		cont = 0;
+        		System.out.println("Não foi possível acessar :" + url);
+        		return false;
+        	}
+        	else{
+        		cont = 0;
+        		return crawl(url);
+        	}
         }
     }
 	
