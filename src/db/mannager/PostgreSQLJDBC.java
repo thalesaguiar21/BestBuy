@@ -18,12 +18,11 @@ public class PostgreSQLJDBC extends DBManager{
 
 	@Override
 	public void openConnection() {
-		if(connection != null){
-			System.out.println("Já exite uma conexão aberta!");
-			return;
-		}
+		
 		System.out.println("Abrindo conexão com o PostgreSQL...");
 		try{
+			if(connection.isClosed()) 
+				openConnection();
 			Class.forName(JDBC_DRIVER);
 			connection = DriverManager.getConnection(DB_URL, adm_user, adm_paswd);
 			connection.setAutoCommit(false);
@@ -38,13 +37,12 @@ public class PostgreSQLJDBC extends DBManager{
 
 	@Override
 	public void closeConnection() {
-		if(connection == null){
-			System.out.println("Não conexões estabelecidas!");
-			return;
-		}
 		System.out.println("Fechando a conexão com o banco...");
 		try {
-			connection.close();
+			if(connection.isClosed())
+				System.out.println("Não conexões estabelecidas!");
+			else
+				connection.close();
 		} catch (SQLException e) {
 			System.err.println("Não foi possível fechar a conexão!");
 			e.printStackTrace();
@@ -54,9 +52,10 @@ public class PostgreSQLJDBC extends DBManager{
 
 	@Override
 	public void update(String sql) {
-		if(connection != null) openConnection();
 		System.out.println("Executando a atualização " + sql + " ...");
 		try{
+			if(connection.isClosed()) 
+				openConnection();
 			stmt = connection.createStatement();
 			stmt.executeUpdate(sql);
 			stmt.close();
