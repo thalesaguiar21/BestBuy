@@ -5,8 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.postgresql.util.PSQLException;
-
 public class PostgreSQLJDBC extends DBManager{
 	
 	public PostgreSQLJDBC() {

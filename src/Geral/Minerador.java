@@ -21,25 +21,22 @@ public class Minerador {
 	  public boolean minerar(Picareta picareta)
 	  {
 		  if(picareta != null && picareta.getBaseUrl() != ""){
-			  String currentUrl;
+			  String currentUrl = picareta.getBaseUrl();
+			  pagVisitadas.add(picareta.getBaseUrl());
 		      while(this.pagVisitadas.size() < MAX_PAGES_TO_SEARCH){
-		          if(this.pagParaVisitar.isEmpty()){
-		              currentUrl = picareta.getBaseUrl();
-		              this.pagVisitadas.add(picareta.getBaseUrl());
-		          }
-		          else{
-		              currentUrl = this.nextUrl();
-		              if(currentUrl.equals("")){
-		            	  break;
-		              }
-		          }
-		          picareta.crawl(currentUrl);
+	              picareta.crawl(currentUrl);
 		          float success = picareta.searchForWord();
 		          if(success != -1f){
 		              System.out.println(String.format("**Sucesso**. Palavra encontrada em %s", currentUrl));
 		          }
 		          this.pagParaVisitar.addAll(picareta.getLinks());
 		          picareta.esvaziarLinks();
+		          do{
+			          currentUrl = this.nextUrl();
+		          }while(currentUrl.equals("") && !pagParaVisitar.isEmpty());
+		          if(currentUrl.equals("")){
+		        	  break;
+		          }
 		      }
 		      System.out.println("\n**Fim**  " + this.pagVisitadas.size() + " página(s) visitada(s)");
 		  } else {return false;}

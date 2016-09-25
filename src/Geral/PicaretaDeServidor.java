@@ -44,9 +44,7 @@ public class PicaretaDeServidor extends Picareta {
             {
             	String nextUrl = link.absUrl("href");
             	if(nextUrl.equals("") || nextUrl.contains("Ordem")
-            						  || nextUrl.contains("codFavorecido=")
-            						  || !(nextUrl.contains("codigoAcao=8442")) 
-            						  || !(nextUrl.contains("codigoMunicipio=1761"))){
+            						  || !(nextUrl.contains("CodOrg=26243")) ){
             		continue;
             	}
             	else{
@@ -85,19 +83,15 @@ public class PicaretaDeServidor extends Picareta {
 	        System.out.println("**ERRO** Invoque crawl() antes de realizar a análise do documento!");
 	        return -1f;
 	    }
-	    List<String> nomes = new ArrayList<String>();
-	    Elements table = this.htmlDocument.select("div > table > tbody > tr");
-	    Elements nome = table.select("td [href]");
-	    Elements cpf = table.select("td.firstchild");
-	    int i = 0;
-	    for(Element e : nome){
-	    	nomes.add(e.text());
-	    }
-	    for(Element e : cpf){
-	    	System.out.println(nomes.get(i) + " " + e);
+	    Elements rows = this.htmlDocument.select("#listagem > table > tbody > tr");
+	    rows.remove(0);
+
+	    for(Element row : rows){
+	    	Elements cells = row.select("td");
+	    	//						CPF 						NOME						ORGAO
+	    	System.out.println(cells.get(0).text() + " " + cells.get(1).text() + "\t\t" + cells.get(2).text());
 	    	//myDb.update("INSERT INTO Servidor(Institucao_idinstitucao, nome, cpf, remuneracao) VALUES (1,'" + nomes.get(i) + "'," + e.text() + ", 0.0)");
-	    	i++;
 	    }
-		return 0;
+		return 1f;
 	}
 }
