@@ -1,22 +1,22 @@
 package Geral;
-import java.io.IOException;
+	import java.io.IOException;
 
-import db.mannager.*;
+	import db.mannager.*;
 
-import org.jsoup.Connection;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
+	import org.jsoup.Connection;
+	import org.jsoup.Jsoup;
+	import org.jsoup.nodes.Document;
+	import org.jsoup.nodes.Element;
+	import org.jsoup.select.Elements;
 
-public class PicaretaDeBFamilia extends Picareta{
-	
+public class PicaretaDeServidor extends Picareta {
+		
 	int cont = 0;
 	DBManager myDb;
 	
-	public PicaretaDeBFamilia(){
+	public PicaretaDeServidor(){
 		this.myDb = new PostgreSQLJDBC();
-		this.setBaseUrl("http://www.portaldatransparencia.gov.br/PortalTransparenciaPesquisaAcaoFavorecido.asp?Exercicio=2016&textoPesquisa=&textoPesquisaAcao=&codigoAcao=8442&codigoFuncao=08&siglaEstado=RN&codigoMunicipio=1761&Pagina=1");
+		this.setBaseUrl("http://www.portaldatransparencia.gov.br/servidores/OrgaoLotacao-ListaServidores.asp?CodOrg=26243&Pagina=1");
 	}
 	
 	@Override
@@ -83,33 +83,10 @@ public class PicaretaDeBFamilia extends Picareta{
 	        System.out.println("**ERRO** Invoque crawl() antes de realizar a análise do documento!");
 	        return -1f;
 	    }
-	    String searchWord = "Órgão de exercício ";
-	    String bodyText = this.htmlDocument.body().text();
-	    System.out.println(bodyText);
-	    if(bodyText.contains(searchWord)){
-	    	int i = bodyText.indexOf(searchWord) + searchWord.length();
-	    	String str = bodyText.substring(i, bodyText.length());
-	    	str = str.substring(0, str.indexOf(" Página"));
-	    	String[] strs = str.split("(?<=\\d )");
-	    	String aux = "";
-	    	for(String s : strs){
-	    		if(s.contains(",")){
-	    			s = s.replaceAll("[\\d,.]", "").trim(); //Nome
-	    			System.out.println(s);
-	    			myDb.update("INSERT INTO Servidor(Institucao_idinstitucao, nome, cpf, remuneracao) VALUES (1, '" + s + "', '" + aux + "', 10.35);");
-	    		}
-	    		else{
-	    			aux = s.replaceAll("[.-]", "");
-	    			aux = aux.substring(0, 3) + "." + aux.substring(3, 6) + "." + aux.substring(6, 9) + "-" + aux.substring(9);
-	    			System.out.println(aux); //CPF
-	    		}
-	    		
-	    	}
-	    	System.out.println();
-	    	return 1f;
+	    Elements bodyText = this.htmlDocument.select("[td]");
+	    for(Element e : bodyText){
+	    	System.out.println(e.text());
 	    }
-	    else{
-	    	return -1f;
-	    }
+		return 0;
 	}
 }

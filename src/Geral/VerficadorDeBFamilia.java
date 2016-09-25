@@ -2,10 +2,18 @@ package Geral;
 import java.util.ArrayList;
 import java.util.List;
 
-import db.mannager.ServidorPublico;
+import db.mannager.*;
 
 public class VerficadorDeBFamilia implements Verificador{
+	
+	private DBManager myDb;
 
+	
+	public VerficadorDeBFamilia() {
+		this.myDb = new PostgreSQLJDBC();
+	}
+	// SELECT * FROM BolsaFamilia bf, Servidor se,
+	// WHERE bf.cpf = se.cpf
 	@Override
 	public List<ServidorPublico> verificar() {
 		List<ServidorPublico> servIncoerentes = new ArrayList<ServidorPublico>();

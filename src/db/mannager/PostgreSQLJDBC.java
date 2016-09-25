@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.postgresql.util.PSQLException;
+
 public class PostgreSQLJDBC extends DBManager{
 	
 	public PostgreSQLJDBC() {
@@ -21,13 +23,11 @@ public class PostgreSQLJDBC extends DBManager{
 		
 		System.out.println("Abrindo conexão com o PostgreSQL...");
 		try{
-			if(connection.isClosed()) 
-				openConnection();
 			Class.forName(JDBC_DRIVER);
 			connection = DriverManager.getConnection(DB_URL, adm_user, adm_paswd);
 			connection.setAutoCommit(false);
 		} catch (Exception e) {
-			System.out.println("Deu ruim!");
+			System.out.println("Erro ao tentar se conectar!");
 			e.printStackTrace();
 	        System.err.println(e.getClass().getName()+": "+e.getMessage());
 	        System.exit(0);
@@ -39,7 +39,7 @@ public class PostgreSQLJDBC extends DBManager{
 	public void closeConnection() {
 		System.out.println("Fechando a conexão com o banco...");
 		try {
-			if(connection.isClosed())
+			if(connection == null || connection.isClosed())
 				System.out.println("Não conexões estabelecidas!");
 			else
 				connection.close();
@@ -54,17 +54,17 @@ public class PostgreSQLJDBC extends DBManager{
 	public void update(String sql) {
 		System.out.println("Executando a atualização " + sql + " ...");
 		try{
-			if(connection.isClosed()) 
+			if(connection == null || connection.isClosed()) 
 				openConnection();
 			stmt = connection.createStatement();
 			stmt.executeUpdate(sql);
 			stmt.close();
 			connection.commit();
+			closeConnection();
 		}catch(Exception e){
 			System.err.println("Erro ao executar atualização!");
-			e.printStackTrace();
-	        System.err.println(e.getClass().getName()+": "+e.getMessage());
-	        System.exit(0);
+			//e.printStackTrace();
+	        //System.err.println(e.getClass().getName()+ ": " + e.getMessage());
 		}
 	}
 
@@ -74,7 +74,8 @@ public class PostgreSQLJDBC extends DBManager{
 		Map<String, Object> linha = null;
 		
 		try{
-			if(connection.isClosed()) openConnection();
+			if(connection == null || connection.isClosed()) 
+				openConnection();
 			stmt = connection.createStatement();
 			ResultSet result = stmt.executeQuery(sql);
 			
