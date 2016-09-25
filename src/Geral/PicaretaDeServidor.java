@@ -18,7 +18,7 @@ public class PicaretaDeServidor extends Picareta {
 	
 	public PicaretaDeServidor(){
 		this.myDb = new PostgreSQLJDBC();
-		this.setBaseUrl("http://www.portaldatransparencia.gov.br/servidores/OrgaoLotacao-ListaServidores.asp?CodOrg=26243&Pagina=1");
+		this.setBaseUrl("http://www.portaldatransparencia.gov.br/servidores/OrgaoLotacao-ListaServidores.asp?CodOrg=26243&Pagina=426");
 	}
 	
 	@Override
@@ -84,7 +84,9 @@ public class PicaretaDeServidor extends Picareta {
 	        return -1f;
 	    }
 	    Elements rows = this.htmlDocument.select("#listagem > table > tbody > tr");
-	    rows.remove(0);
+	    if(rows.size() > 0){
+	    	rows.remove(0);//nome das colunas
+	    }
 
 	    for(Element row : rows){
 	    	Elements cells = row.select("td");
