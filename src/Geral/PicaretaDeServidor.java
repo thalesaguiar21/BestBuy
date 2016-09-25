@@ -1,7 +1,9 @@
 package Geral;
 	import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
-	import db.mannager.*;
+import db.mannager.*;
 
 	import org.jsoup.Connection;
 	import org.jsoup.Jsoup;
@@ -83,9 +85,18 @@ public class PicaretaDeServidor extends Picareta {
 	        System.out.println("**ERRO** Invoque crawl() antes de realizar a análise do documento!");
 	        return -1f;
 	    }
-	    Elements bodyText = this.htmlDocument.select("[td]");
-	    for(Element e : bodyText){
-	    	System.out.println(e.text());
+	    List<String> nomes = new ArrayList<String>();
+	    Elements table = this.htmlDocument.select("div > table > tbody > tr");
+	    Elements nome = table.select("td [href]");
+	    Elements cpf = table.select("td.firstchild");
+	    int i = 0;
+	    for(Element e : nome){
+	    	nomes.add(e.text());
+	    }
+	    for(Element e : cpf){
+	    	System.out.println(nomes.get(i) + " " + e);
+	    	//myDb.update("INSERT INTO Servidor(Institucao_idinstitucao, nome, cpf, remuneracao) VALUES (1,'" + nomes.get(i) + "'," + e.text() + ", 0.0)");
+	    	i++;
 	    }
 		return 0;
 	}
