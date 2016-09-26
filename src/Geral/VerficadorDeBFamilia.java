@@ -6,11 +6,8 @@ import db.mannager.*;
 
 public class VerficadorDeBFamilia implements Verificador{
 	
-	private DBManager myDb;
-
-	
 	public VerficadorDeBFamilia() {
-		this.myDb = new PostgreSQLJDBC();
+		
 	}
 	// SELECT * FROM BolsaFamilia bf, Servidor se,
 	// WHERE bf.cpf = se.cpf

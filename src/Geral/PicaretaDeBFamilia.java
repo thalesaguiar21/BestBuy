@@ -1,8 +1,6 @@
 package Geral;
 import java.io.IOException;
 
-import db.mannager.*;
-
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -11,11 +9,10 @@ import org.jsoup.select.Elements;
 
 public class PicaretaDeBFamilia extends Picareta{
 	
-	int cont = 0;
-	DBManager myDb;
+	private int cont;
 	
 	public PicaretaDeBFamilia(){
-		this.myDb = new PostgreSQLJDBC();
+		cont = 0;
 		this.setBaseUrl("http://www.portaldatransparencia.gov.br/PortalTransparenciaPesquisaAcaoFavorecido.asp?Exercicio=2016&textoPesquisa=&textoPesquisaAcao=&codigoAcao=8442&codigoFuncao=08&siglaEstado=RN&codigoMunicipio=1761&Pagina=1");
 	}
 	
@@ -96,7 +93,7 @@ public class PicaretaDeBFamilia extends Picareta{
 	    		if(s.contains(",")){
 	    			s = s.replaceAll("[\\d,.]", "").trim(); //Nome
 	    			System.out.println(s);
-	    			myDb.update("INSERT INTO Servidor(Institucao_idinstitucao, nome, cpf, remuneracao) VALUES (1, '" + s + "', '" + aux + "', 10.35);");
+	    			DadosDoSistema.getDados().getMyDb().update("INSERT INTO Servidor(Institucao_idinstitucao, nome, cpf, remuneracao) VALUES (1, '" + s + "', '" + aux + "', 10.35);");
 	    		}
 	    		else{
 	    			aux = s.replaceAll("[.-]", "");

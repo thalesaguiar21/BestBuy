@@ -1,23 +1,18 @@
 package Geral;
-	import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.io.IOException;
 
-import db.mannager.*;
-
-	import org.jsoup.Connection;
-	import org.jsoup.Jsoup;
-	import org.jsoup.nodes.Document;
-	import org.jsoup.nodes.Element;
-	import org.jsoup.select.Elements;
+import org.jsoup.Connection;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 public class PicaretaDeServidor extends Picareta {
 		
-	int cont = 0;
-	DBManager myDb;
+	private int cont;
 	
 	public PicaretaDeServidor(){
-		this.myDb = new PostgreSQLJDBC();
+		cont = 0;
 		this.setBaseUrl("http://www.portaldatransparencia.gov.br/servidores/OrgaoLotacao-ListaServidores.asp?CodOrg=26243&Pagina=1");
 	}
 	
@@ -90,7 +85,8 @@ public class PicaretaDeServidor extends Picareta {
 	    	Elements cells = row.select("td");
 	    	//						CPF 						NOME						ORGAO
 	    	System.out.println(cells.get(0).text() + " " + cells.get(1).text() + "\t\t" + cells.get(2).text());
-	    	//myDb.update("INSERT INTO Servidor(Institucao_idinstitucao, nome, cpf, remuneracao) VALUES (1,'" + nomes.get(i) + "'," + e.text() + ", 0.0)");
+	    	DadosDoSistema.getDados().getMyDb().update("INSERT INTO Servidor(Institucao_idinstitucao, nome, cpf, remuneracao) VALUES "+
+	    											   "(1,'" + cells.get(1) + "'," + cells.get(0) + ", 0.0)");
 	    }
 		return 1f;
 	}

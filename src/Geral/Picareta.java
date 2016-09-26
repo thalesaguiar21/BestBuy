@@ -4,6 +4,13 @@ import java.util.List;
 
 import org.jsoup.nodes.Document;
 
+/**
+ * Classe abstrata, que representa a entidade responsável por procurar
+ * os dados requeridos para a aplicação funcionar
+ * .
+ * @author Geovanni Casemiro, Rafael Lucena, Thales Aguiar
+ *
+ */
 public abstract class Picareta {
 
 	private String baseUrl;
