@@ -84,9 +84,9 @@ public class PicaretaDeServidor extends Picareta {
 	    for(Element row : rows){
 	    	Elements cells = row.select("td");
 	    	//						CPF 						NOME						ORGAO
-	    	System.out.println(cells.get(0).text() + " " + cells.get(1).text() + "\t\t" + cells.get(2).text());
+	    	//System.out.println(cells.get(0).text() + " " + cells.get(1).text() + "\t\t" + cells.get(2).text());
 	    	DadosDoSistema.getDados().getMyDb().update("INSERT INTO Servidor(Institucao_idinstitucao, nome, cpf, remuneracao) VALUES "+
-	    											   "(1,'" + cells.get(1) + "'," + cells.get(0) + ", 0.0)");
+	    											   "(1,'" + cells.get(1).text() + "','" + cells.get(0).text() + "', 0.0);");
 	    }
 		return 1f;
 	}
