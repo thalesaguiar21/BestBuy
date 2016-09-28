@@ -7,8 +7,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import Geral.Minerador;
-import Geral.Picareta;
+import WebCrawler.Minerador;
 
 
 /**
@@ -16,7 +15,7 @@ import Geral.Picareta;
  *
  */
 public class MineradorTest {
-	static Picareta ex;
+	static int ex;
 	static Minerador minerador;
 	
 	public static void setUpBeforeClass() throws Exception {
@@ -28,7 +27,7 @@ public class MineradorTest {
 	 * @throws java.lang.Exception
 	 */
 	public static void setUp_null() throws Exception {
-		ex = null;
+		ex = 0;
 	}
 	/**
 	/**

@@ -12,7 +12,10 @@ import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import java.awt.Color;
 import db.mannager.*;
+
 import java.util.List;
+import java.awt.Font;
+import java.awt.SystemColor;
 
 public class GUI {
 
@@ -75,7 +78,10 @@ public class GUI {
 				String data = formataData.format(dataHoje);
 				label.setText(data);	
 				
-				attTextArea(DadosDoSistema.getDados().getServidoresPublicos());
+				textArea.setText("Atualizando a base de dados de bolsa familia...");
+				DadosDoSistema.getDados().getMiner().minerar(1); //Picareata de servidor
+				textArea.append("Atualizando base de dados de servidores...");
+				DadosDoSistema.getDados().getMiner().minerar(2); //Picareata de servidor
 			}
 		});
 		btnNewButton.setBounds(10, 13, 183, 25);
@@ -84,14 +90,17 @@ public class GUI {
 		JButton btnNewButton_1 = new JButton("Buscar Irregularidades - Bolsa Fam\u00EDlia");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				DadosDoSistema.getDados().setVerif(1);
+				attTextArea(DadosDoSistema.getDados().getVerif().verificar());
 			}
 		});
 		btnNewButton_1.setBounds(512, 13, 260, 25);
 		frmMineradorDeCorrupo.getContentPane().add(btnNewButton_1);
 		
 		textArea = new TextArea();
-		textArea.setForeground(Color.WHITE);
+		textArea.setBackground(SystemColor.controlHighlight);
+		textArea.setFont(new Font("Courier New", Font.PLAIN, 15));
+		textArea.setForeground(Color.BLACK);
 		textArea.setEditable(false);
 		textArea.setBounds(10, 68, 762, 477);
 		frmMineradorDeCorrupo.getContentPane().add(textArea);

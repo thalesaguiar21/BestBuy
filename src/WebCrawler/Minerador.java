@@ -1,4 +1,4 @@
-package Geral;
+package WebCrawler;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -7,8 +7,14 @@ import java.util.Set;
 public class Minerador {
 	
 	  private static final int MAX_PAGES_TO_SEARCH = 10000;
-	  private Set<String> pagVisitadas = new HashSet<String>();
-	  private List<String> pagParaVisitar = new LinkedList<String>();
+	  private Set<String> pagVisitadas;
+	  private List<String> pagParaVisitar;
+	  
+	  
+	  public Minerador(){
+		  pagVisitadas = new HashSet<String>();
+		  pagParaVisitar = new LinkedList<String>();
+	  }
 
 
 	  /**
@@ -18,8 +24,9 @@ public class Minerador {
 	   * @param picareta
 	   *            - O tipo de picareta que será usado na busca
 	   */
-	  public boolean minerar(Picareta picareta)
+	  public boolean minerar(int picType)
 	  {
+		  Picareta picareta =  FabricaDePicaretas.criarPicareta(picType);
 		  if(picareta != null && picareta.getBaseUrl() != ""){
 			  String currentUrl = picareta.getBaseUrl();
 			  pagVisitadas.add(picareta.getBaseUrl());

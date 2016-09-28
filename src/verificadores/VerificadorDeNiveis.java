@@ -1,13 +1,13 @@
-package Geral;
+package verificadores;
 import java.util.List;
-import java.util.Map;
 
+import Geral.DadosDoSistema;
 import db.mannager.ServidorPublico;
 
 public class VerificadorDeNiveis implements Verificador{
 
 	@Override
-	public List<Map<String, Object>> verificar() {
+	public List<ServidorPublico> verificar() {
 		for(ServidorPublico serv : DadosDoSistema.getDados().getServidoresPublicos()){
 			System.out.println(serv.getNome());
 		}

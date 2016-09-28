@@ -7,7 +7,7 @@ public class ServidorPublico {
 	private Float remuneracao;
 	private Boolean bFamilia;
 	
-	ServidorPublico(){
+	public ServidorPublico(){
 		this.nome = null;
 		this.cpf = null;
 		this.nivel = null;
@@ -15,12 +15,12 @@ public class ServidorPublico {
 		this.bFamilia = null;
 	}
 	
-	ServidorPublico(String nome, String cpf, Integer nivel, Float remuneracao, Boolean bFamilia){
+	public ServidorPublico(String nome, String cpf){
 		this.nome = nome;
 		this.cpf = cpf;
-		this.nivel = nivel;
-		this.remuneracao = remuneracao;
-		this.bFamilia = bFamilia;
+		this.nivel = 0;
+		this.remuneracao = 0f;
+		this.bFamilia = false;
 	}
 	
 	public String getNome() {

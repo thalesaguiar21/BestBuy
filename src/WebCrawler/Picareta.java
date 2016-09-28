@@ -1,4 +1,4 @@
-package Geral;
+package WebCrawler;
 import java.util.LinkedList;
 import java.util.List;
 

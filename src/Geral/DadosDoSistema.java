@@ -4,9 +4,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import WebCrawler.Minerador;
 import db.mannager.DBManager;
 import db.mannager.PostgreSQLJDBC;
 import db.mannager.ServidorPublico;
+import verificadores.FabricaDeVerificadores;
+import verificadores.Verificador;
 
 /**
  * Classe Singleton para armazenar informações necessárias a todo o sistema,
@@ -20,6 +23,8 @@ public final class DadosDoSistema {
 	private static final DadosDoSistema dadosSis = new DadosDoSistema();
 	private Map<Integer, ArrayList<Float>> remPorNivel;
 	private List<ServidorPublico> ServidoresPublicos;
+	private Minerador miner;
+	private Verificador verif;
 	private DBManager myDb;
 	
 	
@@ -34,6 +39,8 @@ public final class DadosDoSistema {
 	private DadosDoSistema(){
 		this.remPorNivel = new HashMap<Integer, ArrayList<Float>>();
 		this.ServidoresPublicos = new ArrayList<ServidorPublico>();
+		this.miner = new Minerador();
+		this.verif = null;
 		this.myDb = new PostgreSQLJDBC();
 	}
 	
@@ -55,5 +62,17 @@ public final class DadosDoSistema {
 	
 	public void setServidoresPublicos(List<ServidorPublico> ServidoresPublicos){
 		this.ServidoresPublicos = ServidoresPublicos;
+	}
+	
+	public Minerador getMiner(){
+		return this.miner;
+	}
+	
+	public Verificador getVerif(){
+		return this.verif;
+	}
+	
+	public void setVerif(int type){
+		this.verif = FabricaDeVerificadores.criarVerificador(type);
 	}
 }
