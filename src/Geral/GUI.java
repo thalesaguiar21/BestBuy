@@ -1,0 +1,107 @@
+package Geral;
+
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JButton;
+import java.awt.TextArea;
+import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.awt.event.ActionEvent;
+import javax.swing.JLabel;
+import java.awt.Color;
+import db.mannager.*;
+import java.util.List;
+
+public class GUI {
+
+	private JFrame frmMineradorDeCorrupo;
+	private TextArea textArea;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					GUI window = new GUI();
+					window.frmMineradorDeCorrupo.setVisible(true);
+					window.frmMineradorDeCorrupo.setLocationRelativeTo(null);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the application.
+	 */
+	public GUI() {
+		initialize();
+	}
+
+	/**
+	 * Recebe lista e atualiza textArea.
+	 */	
+	public void attTextArea(List<ServidorPublico> l){
+		for(int i=0; i<l.size(); i++){
+			textArea.append("Nome: "+l.get(i).getNome()+" CPF: "+l.get(i).getCpf()+"\n");
+		}
+	}
+	
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {
+		frmMineradorDeCorrupo = new JFrame();
+		frmMineradorDeCorrupo.setTitle("Minerador de corrup\u00E7\u00E3o");
+		frmMineradorDeCorrupo.setBounds(100, 100, 800, 600);
+		frmMineradorDeCorrupo.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmMineradorDeCorrupo.getContentPane().setLayout(null);
+		
+
+		JLabel label = new JLabel("");
+		label.setBounds(326, 17, 174, 16);
+		frmMineradorDeCorrupo.getContentPane().add(label);
+		
+		JButton btnNewButton = new JButton("Atualizar Banco");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Date dataHoje = new Date();
+				SimpleDateFormat formataData = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
+				String data = formataData.format(dataHoje);
+				label.setText(data);	
+				
+				attTextArea(DadosDoSistema.getDados().getServidoresPublicos());
+			}
+		});
+		btnNewButton.setBounds(10, 13, 183, 25);
+		frmMineradorDeCorrupo.getContentPane().add(btnNewButton);
+		
+		JButton btnNewButton_1 = new JButton("Buscar Irregularidades - Bolsa Fam\u00EDlia");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
+		btnNewButton_1.setBounds(512, 13, 260, 25);
+		frmMineradorDeCorrupo.getContentPane().add(btnNewButton_1);
+		
+		textArea = new TextArea();
+		textArea.setForeground(Color.WHITE);
+		textArea.setEditable(false);
+		textArea.setBounds(10, 68, 762, 477);
+		frmMineradorDeCorrupo.getContentPane().add(textArea);
+		
+		JLabel lblNewLabel = new JLabel("\u00DAltima atualiza\u00E7\u00E3o:");
+		lblNewLabel.setBounds(205, 17, 121, 16);
+		frmMineradorDeCorrupo.getContentPane().add(lblNewLabel);
+		
+		JLabel lblNomesDosServidores = new JLabel("Nomes dos servidores p\u00FAblicos da UFRN registrados no bolsa fam\u00EDlia:");
+		lblNomesDosServidores.setBounds(10, 46, 433, 16);
+		frmMineradorDeCorrupo.getContentPane().add(lblNomesDosServidores);
+	}
+}
