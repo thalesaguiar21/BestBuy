@@ -1,4 +1,4 @@
-package WebCrawler;
+package webCrawler;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -24,7 +24,7 @@ public class Minerador {
 	   * @param picareta
 	   *            - O tipo de picareta que será usado na busca
 	   */
-	  public boolean minerar(int picType)
+	  public boolean minerar(EnumPicaretas picType)
 	  {
 		  Picareta picareta =  FabricaDePicaretas.criarPicareta(picType);
 		  if(picareta != null && picareta.getBaseUrl() != ""){

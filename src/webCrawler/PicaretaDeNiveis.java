@@ -1,4 +1,4 @@
-package WebCrawler;
+package webCrawler;
 import java.io.IOException;
 
 import org.jsoup.Connection;
@@ -7,15 +7,10 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import Geral.DadosDoSistema;
-
-public class PicaretaDeBFamilia extends Picareta{
+public class PicaretaDeNiveis extends Picareta{
 	
-	private int cont;
-	
-	public PicaretaDeBFamilia(){
-		cont = 0;
-		this.setBaseUrl("http://www.portaldatransparencia.gov.br/PortalTransparenciaPesquisaAcaoFavorecido.asp?Exercicio=2016&textoPesquisa=&textoPesquisaAcao=&codigoAcao=8442&codigoFuncao=08&siglaEstado=RN&codigoMunicipio=1761&Pagina=1");
+	public PicaretaDeNiveis(){
+		this.setBaseUrl("http://www.portaldatransparencia.gov.br/servidores/OrgaoLotacao-ListaServidores.asp?CodOrg=26243&Pagina=1");
 	}
 	
 	@Override
@@ -40,14 +35,13 @@ public class PicaretaDeBFamilia extends Picareta{
             for(Element link : linksOnPage)
             {
             	String nextUrl = link.absUrl("href");
-            	if(nextUrl.equals("") || nextUrl.contains("Ordem")
-            						  || nextUrl.contains("codFavorecido=")
-            						  || !(nextUrl.contains("codigoAcao=8442")) 
-            						  || !(nextUrl.contains("codigoMunicipio=1761"))){
+            	if(nextUrl.equals("") ||
+            	  !(nextUrl.contains("CodOrg=26243") || nextUrl.contains("CodOrgao=26243")) ||
+            	  nextUrl.contains("Ordem=")){
             		continue;
             	}
             	else{
-            		if(nextUrl.matches(".*Pagina=\\d*#")){
+            		if(nextUrl.matches(".*Pagina=\\d#")){
             			int pageIndex = nextUrl.lastIndexOf("=");
             			String prefix = nextUrl.substring(0, pageIndex + 1);
             			nextUrl = prefix + (Integer.parseInt(nextUrl.substring(pageIndex + 1, nextUrl.length() - 1)) + 1);
@@ -60,17 +54,7 @@ public class PicaretaDeBFamilia extends Picareta{
         catch(IOException ioe)
         {
         	System.out.println(ioe);
-        	System.out.println("Tentando novamente");
-        	cont++;
-        	if(cont >= 5){
-        		cont = 0;
-        		System.out.println("Não foi possível acessar :" + url);
-        		return false;
-        	}
-        	else{
-        		cont = 0;
-        		return crawl(url);
-        	}
+            return false;
         }
     }
 	
@@ -82,28 +66,15 @@ public class PicaretaDeBFamilia extends Picareta{
 	        System.out.println("**ERRO** Invoque crawl() antes de realizar a análise do documento!");
 	        return -1f;
 	    }
-	    String searchWord = "Total no Ano (R$) ";
+	    String searchWord = "Remuneração básica bruta";
 	    String bodyText = this.htmlDocument.body().text();
 	    if(bodyText.contains(searchWord)){
 	    	int i = bodyText.indexOf(searchWord) + searchWord.length();
-	    	String str = bodyText.substring(i, bodyText.length());
-	    	str = str.substring(0, str.indexOf(" Página"));
-	    	String[] strs = str.split("(?<=\\d )");
-	    	String aux = "";
-	    	for(String s : strs){
-	    		if(s.contains(",")){
-	    			s = s.replaceAll("[\\d,.]", "").trim(); //Nome
-	    			DadosDoSistema.getDados().getMyDb().update("INSERT INTO BolsaFamilia(nome, cpf) VALUES ('" + s + "', '" + aux + "');");
-	    		}
-	    		else{
-	    			aux = s.replaceAll("[.-]", "");
-	    			aux = aux.substring(0, 3) + "." + aux.substring(3, 6) + "." + aux.substring(6, 9) + "-" + aux.substring(9);
-	    			System.out.println(aux); //CPF
-	    		}
-	    		
-	    	}
-	    	System.out.println();
-	    	return 1f;
+	    	String str = bodyText.substring(i, i + 15);
+	    	str = str.replaceAll("[^\\d,]", "");
+	    	str = str.replace(",", ".");
+	    	System.out.println("\"" + str + "\"");
+	    	return Float.parseFloat(str);
 	    }
 	    else{
 	    	return -1f;

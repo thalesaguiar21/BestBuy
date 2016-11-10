@@ -2,11 +2,11 @@ package verificadores;
 
 public class FabricaDeVerificadores {
 	
-	public static Verificador criarVerificador(int type){
+	public static Verificador criarVerificador(EnumVerificadores type){
 		switch (type) {
-		case 1:
+		case V_B_FAMILIA:
 			return new VerificadorDeBFamilia();
-		case 2:
+		case V_NIVEIS:
 			return new VerificadorDeNiveis();
 		default:
 			System.out.println("Não existe um verificador para o numero " + type);

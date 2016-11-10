@@ -4,12 +4,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import WebCrawler.Minerador;
 import db.mannager.DBManager;
 import db.mannager.PostgreSQLJDBC;
 import db.mannager.ServidorPublico;
+import verificadores.EnumVerificadores;
 import verificadores.FabricaDeVerificadores;
 import verificadores.Verificador;
+import webCrawler.Minerador;
 
 /**
  * Classe Singleton para armazenar informações necessárias a todo o sistema,
@@ -67,7 +68,7 @@ public final class DadosDoSistema {
 		return this.verif;
 	}
 	
-	public void setVerif(int type){
+	public void setVerif(EnumVerificadores type){
 		this.verif = FabricaDeVerificadores.criarVerificador(type);
 	}
 	

@@ -1,15 +1,15 @@
-package WebCrawler;
+package webCrawler;
 
 
 public class FabricaDePicaretas {
 	
-	public static Picareta criarPicareta(int type){
+	public static Picareta criarPicareta(EnumPicaretas type){
 		switch (type) {
-		case 1:
+		case B_FAMILIA:
 			return new PicaretaDeBFamilia();
-		case 2:
+		case SERVIDOR:
 			return new PicaretaDeServidor();
-		case 3:
+		case NIVEIS:
 			return new PicaretaDeNiveis();
 		default:
 			System.out.println("Não existe uma Picareta para o numero " + type);

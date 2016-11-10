@@ -1,4 +1,4 @@
-package WebCrawler;
+package webCrawler;
 import java.io.IOException;
 
 import org.jsoup.Connection;
@@ -7,9 +7,14 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-public class PicaretaDeNiveis extends Picareta{
+import Geral.DadosDoSistema;
+
+public class PicaretaDeServidor extends Picareta {
+		
+	private int cont;
 	
-	public PicaretaDeNiveis(){
+	public PicaretaDeServidor(){
+		cont = 0;
 		this.setBaseUrl("http://www.portaldatransparencia.gov.br/servidores/OrgaoLotacao-ListaServidores.asp?CodOrg=26243&Pagina=1");
 	}
 	
@@ -35,13 +40,12 @@ public class PicaretaDeNiveis extends Picareta{
             for(Element link : linksOnPage)
             {
             	String nextUrl = link.absUrl("href");
-            	if(nextUrl.equals("") ||
-            	  !(nextUrl.contains("CodOrg=26243") || nextUrl.contains("CodOrgao=26243")) ||
-            	  nextUrl.contains("Ordem=")){
+            	if(nextUrl.equals("") || nextUrl.contains("Ordem")
+            						  || !(nextUrl.contains("CodOrg=26243")) ){
             		continue;
             	}
             	else{
-            		if(nextUrl.matches(".*Pagina=\\d#")){
+            		if(nextUrl.matches(".*Pagina=\\d*#")){
             			int pageIndex = nextUrl.lastIndexOf("=");
             			String prefix = nextUrl.substring(0, pageIndex + 1);
             			nextUrl = prefix + (Integer.parseInt(nextUrl.substring(pageIndex + 1, nextUrl.length() - 1)) + 1);
@@ -54,7 +58,17 @@ public class PicaretaDeNiveis extends Picareta{
         catch(IOException ioe)
         {
         	System.out.println(ioe);
-            return false;
+        	System.out.println("Tentando novamente");
+        	cont++;
+        	if(cont >= 5){
+        		cont = 0;
+        		System.out.println("Não foi possível acessar :" + url);
+        		return false;
+        	}
+        	else{
+        		cont = 0;
+        		return crawl(url);
+        	}
         }
     }
 	
@@ -66,18 +80,18 @@ public class PicaretaDeNiveis extends Picareta{
 	        System.out.println("**ERRO** Invoque crawl() antes de realizar a análise do documento!");
 	        return -1f;
 	    }
-	    String searchWord = "Remuneração básica bruta";
-	    String bodyText = this.htmlDocument.body().text();
-	    if(bodyText.contains(searchWord)){
-	    	int i = bodyText.indexOf(searchWord) + searchWord.length();
-	    	String str = bodyText.substring(i, i + 15);
-	    	str = str.replaceAll("[^\\d,]", "");
-	    	str = str.replace(",", ".");
-	    	System.out.println("\"" + str + "\"");
-	    	return Float.parseFloat(str);
+	    Elements rows = this.htmlDocument.select("#listagem > table > tbody > tr");
+	    if(rows.size() > 0){
+	    	rows.remove(0);//nome das colunas
 	    }
-	    else{
-	    	return -1f;
+
+	    for(Element row : rows){
+	    	Elements cells = row.select("td");
+	    	//						CPF 						NOME						ORGAO
+	    	//System.out.println(cells.get(0).text() + " " + cells.get(1).text() + "\t\t" + cells.get(2).text());
+	    	DadosDoSistema.getDados().getMyDb().update("INSERT INTO Servidor(Institucao_idinstitucao, nome, cpf, remuneracao) VALUES "+
+	    											   "(1,'" + cells.get(1).text() + "','" + cells.get(0).text() + "', 0.0);");
 	    }
+		return 1f;
 	}
 }

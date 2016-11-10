@@ -7,7 +7,8 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import WebCrawler.Minerador;
+import webCrawler.EnumPicaretas;
+import webCrawler.Minerador;
 
 
 /**
@@ -15,7 +16,6 @@ import WebCrawler.Minerador;
  *
  */
 public class MineradorTest {
-	static int ex;
 	static Minerador minerador;
 	
 	public static void setUpBeforeClass() throws Exception {
@@ -27,7 +27,7 @@ public class MineradorTest {
 	 * @throws java.lang.Exception
 	 */
 	public static void setUp_null() throws Exception {
-		ex = 0;
+		
 	}
 	/**
 	/**
@@ -35,7 +35,7 @@ public class MineradorTest {
 	 */
 	//teste1
 	public void teste1_null() throws Exception {
-		assertEquals(false, minerador.minerar(ex));}
+		assertEquals(false, minerador.minerar(EnumPicaretas.NIVEIS));}
 
 	
 	@Test

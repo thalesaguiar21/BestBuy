@@ -12,6 +12,8 @@ import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import java.awt.Color;
 import db.mannager.*;
+import verificadores.EnumVerificadores;
+import webCrawler.EnumPicaretas;
 
 import java.util.List;
 import java.awt.Font;
@@ -79,9 +81,9 @@ public class GUI {
 				label.setText(data);	
 				
 				textArea.setText("Atualizando a base de dados de bolsa familia...");
-				DadosDoSistema.getDados().getMiner().minerar(1); //Picareata de servidor
+				DadosDoSistema.getDados().getMiner().minerar(EnumPicaretas.B_FAMILIA); //Picareata de servidor
 				textArea.append("Atualizando base de dados de servidores...");
-				DadosDoSistema.getDados().getMiner().minerar(2); //Picareata de servidor
+				DadosDoSistema.getDados().getMiner().minerar(EnumPicaretas.SERVIDOR); //Picareata de servidor
 			}
 		});
 		btnNewButton.setBounds(10, 13, 183, 25);
@@ -90,7 +92,7 @@ public class GUI {
 		JButton btnNewButton_1 = new JButton("Buscar Irregularidades - Bolsa Fam\u00EDlia");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				DadosDoSistema.getDados().setVerif(1);
+				DadosDoSistema.getDados().setVerif(EnumVerificadores.V_B_FAMILIA);
 				attTextArea(DadosDoSistema.getDados().getVerif().verificar());
 			}
 		});
