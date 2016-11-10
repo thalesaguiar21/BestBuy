@@ -20,21 +20,13 @@ import verificadores.Verificador;
  */
 public final class DadosDoSistema {
 	
-	private static final DadosDoSistema dadosSis = new DadosDoSistema();
+	private static DadosDoSistema dadosSis;
 	private Map<Integer, ArrayList<Float>> remPorNivel;
 	private List<ServidorPublico> ServidoresPublicos;
 	private Minerador miner;
 	private Verificador verif;
 	private DBManager myDb;
 	
-	
-	public DBManager getMyDb() {
-		return myDb;
-	}
-
-	public void setMyDb(DBManager myDb) {
-		this.myDb = myDb;
-	}
 
 	private DadosDoSistema(){
 		this.remPorNivel = new HashMap<Integer, ArrayList<Float>>();
@@ -45,6 +37,9 @@ public final class DadosDoSistema {
 	}
 	
 	public static DadosDoSistema getDados(){
+		if(dadosSis == null){
+			dadosSis = new DadosDoSistema();
+		}
 		return dadosSis;
 	}
 	
@@ -74,5 +69,13 @@ public final class DadosDoSistema {
 	
 	public void setVerif(int type){
 		this.verif = FabricaDeVerificadores.criarVerificador(type);
+	}
+	
+	public DBManager getMyDb() {
+		return myDb;
+	}
+	
+	public void setMyDb(DBManager myDb) {
+		this.myDb = myDb;
 	}
 }
