@@ -8,8 +8,8 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import webCrawler.Picareta;
-import webCrawler.PicaretaDeNiveis;
+import WebCrawler.Picareta;
+import WebCrawler.PicaretaDeNiveis;
 
 /**
  * @author Geovanni, Thales e Rafael
@@ -27,7 +27,7 @@ public class PicaretaDeNiveisTest {
 	}
 
 	/**
-	 * Test method for {@link webCrawler.PicaretaDeBFamilia#crawl(java.lang.String)}.
+	 * Test method for {@link WebCrawler.PicaretaDeBFamilia#crawl(java.lang.String)}.
 	 */
 	@Test
 	public void test_baseUrl() {
@@ -35,7 +35,7 @@ public class PicaretaDeNiveisTest {
 	}
 	
 	/**
-	 * Test method for {@link webCrawler.PicaretaDeNiveis#PicaretaDeNiveis()}.
+	 * Test method for {@link WebCrawler.PicaretaDeNiveis#PicaretaDeNiveis()}.
 	 * @throws Exception 
 	 */
 	@Test

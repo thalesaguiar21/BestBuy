@@ -8,8 +8,8 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import webCrawler.Picareta;
-import webCrawler.PicaretaDeBFamilia;
+import WebCrawler.Picareta;
+import WebCrawler.PicaretaDeBFamilia;
 
 /**
  * @author Geovanni, Thales e Rafael
@@ -28,14 +28,14 @@ public class PicaretaDeBFamiliaTest {
 	}
 
 	/**
-	 * Test method for {@link webCrawler.PicaretaDeBFamilia#crawl(java.lang.String)}.
+	 * Test method for {@link WebCrawler.PicaretaDeBFamilia#crawl(java.lang.String)}.
 	 */
 	@Test
 	public void test_baseUrl() {
 		assertEquals(true, picbf.getBaseUrl().contains("portaldatransparencia.gov.br"));
 	}
 	/**
-	 * Test method for {@link webCrawler.PicaretaDeBFamilia#PicaretaDeBFamilia()}.
+	 * Test method for {@link WebCrawler.PicaretaDeBFamilia#PicaretaDeBFamilia()}.
 	 * @throws Exception 
 	 */
 	@Test

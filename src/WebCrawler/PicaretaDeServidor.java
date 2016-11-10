@@ -1,4 +1,4 @@
-package webCrawler;
+package WebCrawler;
 import java.io.IOException;
 
 import org.jsoup.Connection;
@@ -9,13 +9,13 @@ import org.jsoup.select.Elements;
 
 import Geral.DadosDoSistema;
 
-public class PicaretaDeBFamilia extends Picareta{
-	
+public class PicaretaDeServidor extends Picareta {
+		
 	private int cont;
 	
-	public PicaretaDeBFamilia(){
+	public PicaretaDeServidor(){
 		cont = 0;
-		this.setBaseUrl("http://www.portaldatransparencia.gov.br/PortalTransparenciaPesquisaAcaoFavorecido.asp?Exercicio=2016&textoPesquisa=&textoPesquisaAcao=&codigoAcao=8442&codigoFuncao=08&siglaEstado=RN&codigoMunicipio=1761&Pagina=1");
+		this.setBaseUrl("http://www.portaldatransparencia.gov.br/servidores/OrgaoLotacao-ListaServidores.asp?CodOrg=26243&Pagina=1");
 	}
 	
 	@Override
@@ -41,9 +41,7 @@ public class PicaretaDeBFamilia extends Picareta{
             {
             	String nextUrl = link.absUrl("href");
             	if(nextUrl.equals("") || nextUrl.contains("Ordem")
-            						  || nextUrl.contains("codFavorecido=")
-            						  || !(nextUrl.contains("codigoAcao=8442")) 
-            						  || !(nextUrl.contains("codigoMunicipio=1761"))){
+            						  || !(nextUrl.contains("CodOrg=26243")) ){
             		continue;
             	}
             	else{
@@ -82,31 +80,18 @@ public class PicaretaDeBFamilia extends Picareta{
 	        System.out.println("**ERRO** Invoque crawl() antes de realizar a análise do documento!");
 	        return -1f;
 	    }
-	    String searchWord = "Total no Ano (R$) ";
-	    String bodyText = this.htmlDocument.body().text();
-	    if(bodyText.contains(searchWord)){
-	    	int i = bodyText.indexOf(searchWord) + searchWord.length();
-	    	String str = bodyText.substring(i, bodyText.length());
-	    	str = str.substring(0, str.indexOf(" Página"));
-	    	String[] strs = str.split("(?<=\\d )");
-	    	String aux = "";
-	    	for(String s : strs){
-	    		if(s.contains(",")){
-	    			s = s.replaceAll("[\\d,.]", "").trim(); //Nome
-	    			DadosDoSistema.getDados().getMyDb().update("INSERT INTO BolsaFamilia(nome, cpf) VALUES ('" + s + "', '" + aux + "');");
-	    		}
-	    		else{
-	    			aux = s.replaceAll("[.-]", "");
-	    			aux = aux.substring(0, 3) + "." + aux.substring(3, 6) + "." + aux.substring(6, 9) + "-" + aux.substring(9);
-	    			System.out.println(aux); //CPF
-	    		}
-	    		
-	    	}
-	    	System.out.println();
-	    	return 1f;
+	    Elements rows = this.htmlDocument.select("#listagem > table > tbody > tr");
+	    if(rows.size() > 0){
+	    	rows.remove(0);//nome das colunas
 	    }
-	    else{
-	    	return -1f;
+
+	    for(Element row : rows){
+	    	Elements cells = row.select("td");
+	    	//						CPF 						NOME						ORGAO
+	    	//System.out.println(cells.get(0).text() + " " + cells.get(1).text() + "\t\t" + cells.get(2).text());
+	    	DadosDoSistema.getDados().getMyDb().update("INSERT INTO Servidor(Institucao_idinstitucao, nome, cpf, remuneracao) VALUES "+
+	    											   "(1,'" + cells.get(1).text() + "','" + cells.get(0).text() + "', 0.0);");
 	    }
+		return 1f;
 	}
 }

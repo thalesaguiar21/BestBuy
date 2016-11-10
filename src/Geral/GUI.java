@@ -10,10 +10,12 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
+
+import WebCrawler.EnumPicaretas;
+
 import java.awt.Color;
 import db.mannager.*;
 import verificadores.EnumVerificadores;
-import webCrawler.EnumPicaretas;
 
 import java.util.List;
 import java.awt.Font;

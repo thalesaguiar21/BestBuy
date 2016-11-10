@@ -1,4 +1,4 @@
-package webCrawler;
+package WebCrawler;
 
 
 public class FabricaDePicaretas {
