@@ -1,17 +1,8 @@
 package WebCrawler;
-import java.io.IOException;
-
-import org.jsoup.Connection;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 
 import Geral.DadosDoSistema;
 
 public class PicaretaDeBFamilia extends Picareta{
-	
-	private int cont;
 	
 	public PicaretaDeBFamilia(){
 		cont = 0;
@@ -19,59 +10,12 @@ public class PicaretaDeBFamilia extends Picareta{
 	}
 	
 	@Override
-	public boolean crawl(String url)
+	public boolean comp(String url)
     {
-        try
-        {
-            Connection connection = Jsoup.connect(url).userAgent(USER_AGENT);
-            Document htmlDocument = connection.get();
-            this.htmlDocument = htmlDocument;
-            if(connection.response().statusCode() == 200)
-            {
-                System.out.println("\nVisitando... recebida a seguinte página: " + url);
-            }
-            if(!connection.response().contentType().contains("text/html"))
-            {
-                System.out.println("**FALHA** algo que não é HTML foi retornado!");
-                return false;
-            }
-            Elements linksOnPage = htmlDocument.select("a[href]");
-            System.out.println("Found (" + linksOnPage.size() + ") links");
-            for(Element link : linksOnPage)
-            {
-            	String nextUrl = link.absUrl("href");
-            	if(nextUrl.equals("") || nextUrl.contains("Ordem")
-            						  || nextUrl.contains("codFavorecido=")
-            						  || !(nextUrl.contains("codigoAcao=8442")) 
-            						  || !(nextUrl.contains("codigoMunicipio=1761"))){
-            		continue;
-            	}
-            	else{
-            		if(nextUrl.matches(".*Pagina=\\d*#")){
-            			int pageIndex = nextUrl.lastIndexOf("=");
-            			String prefix = nextUrl.substring(0, pageIndex + 1);
-            			nextUrl = prefix + (Integer.parseInt(nextUrl.substring(pageIndex + 1, nextUrl.length() - 1)) + 1);
-            		}
-            		this.links.add(nextUrl);
-            	}
-            }
-            return true;
-        }
-        catch(IOException ioe)
-        {
-        	System.out.println(ioe);
-        	System.out.println("Tentando novamente");
-        	cont++;
-        	if(cont >= 5){
-        		cont = 0;
-        		System.out.println("Não foi possível acessar :" + url);
-        		return false;
-        	}
-        	else{
-        		cont = 0;
-        		return crawl(url);
-        	}
-        }
+		return url.equals("") || url.contains("Ordem")
+				  || url.contains("codFavorecido=")
+				  || !(url.contains("codigoAcao=8442")) 
+				  || !(url.contains("codigoMunicipio=1761"));
     }
 	
 	@Override

@@ -1,8 +1,13 @@
 package WebCrawler;
+import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.jsoup.Connection;
+import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 /**
  * Classe abstrata, que representa a entidade responsável por procurar
@@ -18,6 +23,7 @@ public abstract class Picareta {
             "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/13.0.782.112 Safari/535.1";
     protected List<String> links = new LinkedList<String>();
     protected Document htmlDocument;
+    protected int cont = 0;
 
 
     /**
@@ -28,7 +34,59 @@ public abstract class Picareta {
      *            - O url da página que será visitada
      * @return Se a visita foi um sucesso ou não
      */
-    public abstract boolean crawl(String url);
+    public final boolean crawl(String url){
+        try
+        {
+            Connection connection = Jsoup.connect(url).userAgent(USER_AGENT);
+            Document htmlDocument = connection.get();
+            this.htmlDocument = htmlDocument;
+            if(connection.response().statusCode() == 200)
+            {
+                System.out.println("\nVisitando... recebida a seguinte página: " + url);
+            }
+            if(!connection.response().contentType().contains("text/html"))
+            {
+                System.out.println("**FALHA** algo que não é HTML foi retornado!");
+                return false;
+            }
+    		Elements linksOnPage = htmlDocument.select("a[href]");
+    		System.out.println("Found (" + linksOnPage.size() + ") links");
+    		for(Element link : linksOnPage)
+    		{
+            	String nextUrl = link.absUrl("href");
+            	if(comp(nextUrl) ){
+            		continue;
+            	}
+            	else{
+            		if(nextUrl.matches(".*Pagina=\\d*#")){
+            			int pageIndex = nextUrl.lastIndexOf("=");
+            			String prefix = nextUrl.substring(0, pageIndex + 1);
+            			nextUrl = prefix + (Integer.parseInt(nextUrl.substring(pageIndex + 1, nextUrl.length() - 1)) + 1);
+            		}
+            		this.links.add(nextUrl);
+            	}
+            }
+            return true;
+        }
+        catch(IOException ioe)
+        {
+        	System.out.println(ioe);
+        	System.out.println("Tentando novamente");
+        	cont++;
+        	if(cont >= 5){
+        		cont = 0;
+        		System.out.println("Não foi possível acessar :" + url);
+        		return false;
+        	}
+        	else if(crawl(url)){
+    			cont = 0;
+    			return true;
+        	}
+        	else{
+        		return false;
+        	}
+        }
+    }
 
 
     /**
@@ -38,6 +96,8 @@ public abstract class Picareta {
      * @return Se a palavra foi ou não encontrada
      */
     public abstract float searchForWord();
+    
+    protected abstract boolean comp(String url);
 
 
     public List<String> getLinks()

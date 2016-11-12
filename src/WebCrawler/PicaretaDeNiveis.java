@@ -1,11 +1,4 @@
 package WebCrawler;
-import java.io.IOException;
-
-import org.jsoup.Connection;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 
 public class PicaretaDeNiveis extends Picareta{
 	
@@ -14,48 +7,9 @@ public class PicaretaDeNiveis extends Picareta{
 	}
 	
 	@Override
-	public boolean crawl(String url)
+	public boolean comp(String url)
     {
-        try
-        {
-            Connection connection = Jsoup.connect(url).userAgent(USER_AGENT);
-            Document htmlDocument = connection.get();
-            this.htmlDocument = htmlDocument;
-            if(connection.response().statusCode() == 200)
-            {
-                System.out.println("\nVisitando... recebida a seguinte página: " + url);
-            }
-            if(!connection.response().contentType().contains("text/html"))
-            {
-                System.out.println("**FALHA** algo que não é HTML foi retornado!");
-                return false;
-            }
-            Elements linksOnPage = htmlDocument.select("a[href]");
-            System.out.println("Found (" + linksOnPage.size() + ") links");
-            for(Element link : linksOnPage)
-            {
-            	String nextUrl = link.absUrl("href");
-            	if(nextUrl.equals("") ||
-            	  !(nextUrl.contains("CodOrg=26243") || nextUrl.contains("CodOrgao=26243")) ||
-            	  nextUrl.contains("Ordem=")){
-            		continue;
-            	}
-            	else{
-            		if(nextUrl.matches(".*Pagina=\\d#")){
-            			int pageIndex = nextUrl.lastIndexOf("=");
-            			String prefix = nextUrl.substring(0, pageIndex + 1);
-            			nextUrl = prefix + (Integer.parseInt(nextUrl.substring(pageIndex + 1, nextUrl.length() - 1)) + 1);
-            		}
-            		this.links.add(nextUrl);
-            	}
-            }
-            return true;
-        }
-        catch(IOException ioe)
-        {
-        	System.out.println(ioe);
-            return false;
-        }
+    	return url.equals("") || !url.contains("CodOrg=26243") || url.contains("Ordem=");
     }
 	
 	@Override

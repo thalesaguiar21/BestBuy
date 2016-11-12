@@ -70,7 +70,7 @@ public class GUI {
 		frmMineradorDeCorrupo.getContentPane().setLayout(null);
 		
 
-		JLabel label = new JLabel("");
+		final JLabel label = new JLabel("");
 		label.setBounds(326, 17, 174, 16);
 		frmMineradorDeCorrupo.getContentPane().add(label);
 		
