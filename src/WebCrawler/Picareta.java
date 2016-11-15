@@ -58,11 +58,7 @@ public abstract class Picareta {
             		continue;
             	}
             	else{
-            		if(nextUrl.matches(".*Pagina=\\d*#")){
-            			int pageIndex = nextUrl.lastIndexOf("=");
-            			String prefix = nextUrl.substring(0, pageIndex + 1);
-            			nextUrl = prefix + (Integer.parseInt(nextUrl.substring(pageIndex + 1, nextUrl.length() - 1)) + 1);
-            		}
+            		nextUrl = javascriptLinks(nextUrl);
             		this.links.add(nextUrl);
             	}
             }
@@ -98,6 +94,15 @@ public abstract class Picareta {
     public abstract float searchForWord();
     
     protected abstract boolean comp(String url);
+    
+    protected String javascriptLinks(String url){
+		if(url.matches(".*Pagina=\\d*#")){
+			int pageIndex = url.lastIndexOf("=");
+			String prefix = url.substring(0, pageIndex + 1);
+			url = prefix + (Integer.parseInt(url.substring(pageIndex + 1, url.length() - 1)) + 1);
+		}
+		return url;
+    }
 
 
     public List<String> getLinks()

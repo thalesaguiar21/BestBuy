@@ -82,8 +82,8 @@ public class GUI {
 				String data = formataData.format(dataHoje);
 				label.setText(data);	
 				
-				textArea.setText("Atualizando a base de dados de bolsa familia...");
-				DadosDoSistema.getDados().getMiner().minerar(EnumPicaretas.B_FAMILIA); //Picareata de servidor
+				//textArea.setText("Atualizando a base de dados de bolsa familia...");
+				//DadosDoSistema.getDados().getMiner().minerar(EnumPicaretas.B_FAMILIA); //Picareata de servidor
 				textArea.append("Atualizando base de dados de servidores...");
 				DadosDoSistema.getDados().getMiner().minerar(EnumPicaretas.SERVIDOR); //Picareata de servidor
 			}
