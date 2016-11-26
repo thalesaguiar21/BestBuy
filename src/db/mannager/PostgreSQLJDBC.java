@@ -13,7 +13,7 @@ public class PostgreSQLJDBC extends DBManager{
 		JDBC_DRIVER = "org.postgresql.Driver";
 		DB_URL = "jdbc:postgresql://localhost:5432/minerDB";
 		adm_user = "postgres";
-		adm_paswd = "12122014";
+		adm_paswd = "admin";
 		connection = null;
 		stmt = null;
 	}
@@ -63,7 +63,7 @@ public class PostgreSQLJDBC extends DBManager{
 			closeConnection();
 		}catch(Exception e){
 			System.err.println("Erro ao executar atualização!");
-			//e.printStackTrace();
+			e.printStackTrace();
 	        //System.err.println(e.getClass().getName()+ ": " + e.getMessage());
 		}
 	}

@@ -35,9 +35,9 @@ public class PicaretaDeServidor extends Picareta {
 
 	    if(r.size() > 2){
 		    //System.out.println(r2.get(1).text() + " " + r2.get(3).text() + " " + r.get(2).text());
-		    //System.out.println(r2.get(1).text() + " " + r2.get(3).text() + " " + r.get(0).text());
-	    	DadosGlobais.getDados().getMyDb().update("INSERT INTO Servidor(Institucao_idinstitucao, nome, cpf, remuneracao) VALUES "+
-	    											   "(1,'" + r2.get(1).text() + "','" + r2.get(3).text() + "', " + r.get(2).text() +");");
+		    System.out.println("aeHOOOO" + r2.get(1).text() + " " + r2.get(3).text() + " " + r.get(0).text());
+	    	DadosGlobais.getDados().getMyDb().update("INSERT INTO Servidor(institucao_idinstitucao, nome, cpf, remuneracao) VALUES "+
+	    											   "(1,'" + r2.get(1).text() + "','" + r2.get(3).text() + "', " + r.get(2).text().replaceAll("[.-]", "").replace(',', '.') +");");
 	    }
 		return 1f;
 	}
