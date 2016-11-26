@@ -7,8 +7,8 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import WebCrawler.EnumPicaretas;
-import WebCrawler.Minerador;
+import webcrawler.EnumPicaretas;
+import webcrawler.Minerador;
 
 
 /**

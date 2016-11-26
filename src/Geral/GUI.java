@@ -11,11 +11,10 @@ import java.util.Date;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 
-import WebCrawler.EnumPicaretas;
-
 import java.awt.Color;
 import db.mannager.*;
-import verificadores.EnumVerificadores;
+import matchers.EnumMatchers;
+import webcrawler.EnumPicaretas;
 
 import java.util.List;
 import java.awt.Font;
@@ -85,7 +84,7 @@ public class GUI {
 				//textArea.setText("Atualizando a base de dados de bolsa familia...");
 				//DadosDoSistema.getDados().getMiner().minerar(EnumPicaretas.B_FAMILIA); //Picareata de servidor
 				textArea.append("Atualizando base de dados de servidores...");
-				DadosDoSistema.getDados().getMiner().minerar(EnumPicaretas.SERVIDOR); //Picareata de servidor
+				DadosGlobais.getDados().getMiner().minerar(EnumPicaretas.SERVIDOR); //Picareata de servidor
 			}
 		});
 		btnNewButton.setBounds(10, 13, 183, 25);
@@ -94,8 +93,8 @@ public class GUI {
 		JButton btnNewButton_1 = new JButton("Buscar Irregularidades - Bolsa Fam\u00EDlia");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				DadosDoSistema.getDados().setVerif(EnumVerificadores.V_B_FAMILIA);
-				attTextArea(DadosDoSistema.getDados().getVerif().verificar());
+				DadosGlobais.getDados().setMatcher(EnumMatchers.V_B_FAMILIA);
+				attTextArea(DadosGlobais.getDados().getMatcher().allMatchs());
 			}
 		});
 		btnNewButton_1.setBounds(512, 13, 260, 25);

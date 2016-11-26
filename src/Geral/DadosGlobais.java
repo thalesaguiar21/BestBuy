@@ -4,13 +4,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import WebCrawler.Minerador;
 import db.mannager.DBManager;
 import db.mannager.PostgreSQLJDBC;
 import db.mannager.ServidorPublico;
-import verificadores.EnumVerificadores;
-import verificadores.FabricaDeVerificadores;
-import verificadores.Verificador;
+import matchers.EnumMatchers;
+import matchers.FabricaDeMatchers;
+import matchers.Matcher;
+import webcrawler.Minerador;
 
 /**
  * Classe Singleton para armazenar informações necessárias a todo o sistema,
@@ -19,27 +19,27 @@ import verificadores.Verificador;
  * @author Geovanni, Rafael, Thales 
  *
  */
-public final class DadosDoSistema {
+public final class DadosGlobais {
 	
-	private static DadosDoSistema dadosSis;
+	private static DadosGlobais dadosSis;
 	private Map<Integer, ArrayList<Float>> remPorNivel;
 	private List<ServidorPublico> ServidoresPublicos;
 	private Minerador miner;
-	private Verificador verif;
+	private Matcher matcher;
 	private DBManager myDb;
 	
 
-	private DadosDoSistema(){
-		this.remPorNivel = new HashMap<Integer, ArrayList<Float>>();
+	private DadosGlobais(){
+		this.remPorNivel        = new HashMap<Integer, ArrayList<Float>>();
 		this.ServidoresPublicos = new ArrayList<ServidorPublico>();
-		this.miner = new Minerador();
-		this.verif = null;
-		this.myDb = new PostgreSQLJDBC();
+		this.miner              = new Minerador();
+		this.matcher            = null;
+		this.myDb               = new PostgreSQLJDBC();
 	}
 	
-	public static DadosDoSistema getDados(){
+	public static DadosGlobais getDados(){
 		if(dadosSis == null){
-			dadosSis = new DadosDoSistema();
+			dadosSis = new DadosGlobais();
 		}
 		return dadosSis;
 	}
@@ -64,12 +64,12 @@ public final class DadosDoSistema {
 		return this.miner;
 	}
 	
-	public Verificador getVerif(){
-		return this.verif;
+	public Matcher getMatcher(){
+		return this.matcher;
 	}
 	
-	public void setVerif(EnumVerificadores type){
-		this.verif = FabricaDeVerificadores.criarVerificador(type);
+	public void setMatcher(EnumMatchers type){
+		this.matcher = FabricaDeMatchers.criarMatcher(type);
 	}
 	
 	public DBManager getMyDb() {

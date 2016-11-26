@@ -1,21 +1,21 @@
-package verificadores;
+package matchers;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import Geral.DadosDoSistema;
+import Geral.DadosGlobais;
 import db.mannager.*;
 
-public class VerificadorDeBFamilia implements Verificador{
+public class MatcherDadosFederais implements Matcher{
 	
-	public VerificadorDeBFamilia() {
+	public MatcherDadosFederais() {
 		
 	}
 	
 	@Override
-	public List<ServidorPublico> verificar() {
+	public List<ServidorPublico> allMatchs() {
 		List<Map<String, Object>> servIncoerentes = new ArrayList<Map<String, Object>>();
-		servIncoerentes = DadosDoSistema.getDados().getMyDb().select("SELECT se.nome, se.cpf FROM BolsaFamilia bf, Servidor se\n" +
+		servIncoerentes = DadosGlobais.getDados().getMyDb().select("SELECT se.nome, se.cpf FROM BolsaFamilia bf, Servidor se\n" +
 																	 "WHERE substring(se.cpf from 4 for 9) = substring(bf.cpf from 4 for 9)\n" +
 																	 "ORDER BY se.nome, se.cpf;");
 		List<ServidorPublico> servidores = new ArrayList<ServidorPublico>();
@@ -30,9 +30,9 @@ public class VerificadorDeBFamilia implements Verificador{
 	}
 
 	@Override
-	public List<ServidorPublico> verificar(String nome) {
+	public List<ServidorPublico> matchByName(String nome) {
 		List<ServidorPublico> servIncoerentes = new ArrayList<ServidorPublico>();
-		for(ServidorPublico serv : DadosDoSistema.getDados().getServidoresPublicos()){
+		for(ServidorPublico serv : DadosGlobais.getDados().getServidoresPublicos()){
 			String servNome = serv.getNome().trim();
 			if(serv.getbFamilia() & servNome.equalsIgnoreCase(nome)) servIncoerentes.add(serv);
 		}
@@ -40,7 +40,7 @@ public class VerificadorDeBFamilia implements Verificador{
 	}
 
 	@Override
-	public List<ServidorPublico> verificar(List<String> nomes) {
+	public List<ServidorPublico> matchByNames(List<String> nomes) {
 		return null;
 	}
 

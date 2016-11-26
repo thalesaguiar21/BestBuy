@@ -1,9 +1,8 @@
-package WebCrawler;
+package webcrawler;
 
-import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import Geral.DadosDoSistema;
+import Geral.DadosGlobais;
 
 public class PicaretaDeServidor extends Picareta {
 	
@@ -36,7 +35,7 @@ public class PicaretaDeServidor extends Picareta {
 	    if(r.size() > 2){
 		    //System.out.println(r2.get(1).text() + " " + r2.get(3).text() + " " + r.get(2).text());
 		    //System.out.println(r2.get(1).text() + " " + r2.get(3).text() + " " + r.get(0).text());
-	    	DadosDoSistema.getDados().getMyDb().update("INSERT INTO Servidor(Institucao_idinstitucao, nome, cpf, remuneracao) VALUES "+
+	    	DadosGlobais.getDados().getMyDb().update("INSERT INTO Servidor(Institucao_idinstitucao, nome, cpf, remuneracao) VALUES "+
 	    											   "(1,'" + r2.get(1).text() + "','" + r2.get(3).text() + "', " + r.get(2).text() +");");
 	    }
 		return 1f;

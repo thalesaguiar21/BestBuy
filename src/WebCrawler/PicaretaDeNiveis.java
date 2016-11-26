@@ -1,4 +1,4 @@
-package WebCrawler;
+package webcrawler;
 
 public class PicaretaDeNiveis extends Picareta{
 	

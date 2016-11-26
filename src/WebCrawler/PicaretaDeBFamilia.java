@@ -1,6 +1,6 @@
-package WebCrawler;
+package webcrawler;
 
-import Geral.DadosDoSistema;
+import Geral.DadosGlobais;
 
 public class PicaretaDeBFamilia extends Picareta{
 	
@@ -37,7 +37,7 @@ public class PicaretaDeBFamilia extends Picareta{
 	    	for(String s : strs){
 	    		if(s.contains(",")){
 	    			s = s.replaceAll("[\\d,.]", "").trim(); //Nome
-	    			DadosDoSistema.getDados().getMyDb().update("INSERT INTO BolsaFamilia(nome, cpf) VALUES ('" + s + "', '" + aux + "');");
+	    			DadosGlobais.getDados().getMyDb().update("INSERT INTO BolsaFamilia(nome, cpf) VALUES ('" + s + "', '" + aux + "');");
 	    		}
 	    		else{
 	    			aux = s.replaceAll("[.-]", "");
