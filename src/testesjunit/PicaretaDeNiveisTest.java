@@ -8,7 +8,7 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import webcrawler.Picareta;
+import framework.webcrawler.Picareta;
 import webcrawler.PicaretaDeNiveis;
 
 /**

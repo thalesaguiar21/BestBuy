@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import framework.db.DBManager;
+
 public class PostgreSQLJDBC extends DBManager{
 	
 	public PostgreSQLJDBC() {

@@ -3,8 +3,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import Geral.DadosGlobais;
 import db.mannager.*;
+import framework.DadosGlobais;
+import framework.match.Matcher;
 
 public class MatcherDadosFederais implements Matcher{
 	

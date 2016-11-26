@@ -1,16 +1,16 @@
-package Geral;
+package framework;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import db.mannager.DBManager;
 import db.mannager.PostgreSQLJDBC;
 import db.mannager.ServidorPublico;
-import matchers.EnumMatchers;
-import matchers.FabricaDeMatchers;
-import matchers.Matcher;
-import webcrawler.Minerador;
+import framework.db.DBManager;
+import framework.match.EnumMatchers;
+import framework.match.FabricaDeMatchers;
+import framework.match.Matcher;
+import framework.webcrawler.Minerador;
 
 /**
  * Classe Singleton para armazenar informações necessárias a todo o sistema,

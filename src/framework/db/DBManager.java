@@ -1,4 +1,4 @@
-package db.mannager;
+package framework.db;
 import java.sql.*;
 import java.util.List;
 import java.util.Map;

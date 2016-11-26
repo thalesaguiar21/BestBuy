@@ -1,4 +1,6 @@
-package matchers;
+package framework.match;
+
+import matchers.MatcherDadosFederais;
 
 public class FabricaDeMatchers {
 	

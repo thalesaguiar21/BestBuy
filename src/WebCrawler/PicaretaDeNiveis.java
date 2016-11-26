@@ -1,5 +1,7 @@
 package webcrawler;
 
+import framework.webcrawler.Picareta;
+
 public class PicaretaDeNiveis extends Picareta{
 	
 	public PicaretaDeNiveis(){

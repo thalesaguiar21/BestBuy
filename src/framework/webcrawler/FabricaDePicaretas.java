@@ -1,5 +1,8 @@
-package webcrawler;
+package framework.webcrawler;
 
+import webcrawler.PicaretaDeBFamilia;
+import webcrawler.PicaretaDeNiveis;
+import webcrawler.PicaretaDeServidor;
 
 public class FabricaDePicaretas {
 	

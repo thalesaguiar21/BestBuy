@@ -1,6 +1,7 @@
 package webcrawler;
 
-import Geral.DadosGlobais;
+import framework.DadosGlobais;
+import framework.webcrawler.Picareta;
 
 public class PicaretaDeBFamilia extends Picareta{
 	

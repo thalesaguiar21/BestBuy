@@ -1,4 +1,4 @@
-package Geral;
+package framework;
 
 import java.awt.EventQueue;
 
@@ -13,8 +13,8 @@ import javax.swing.JLabel;
 
 import java.awt.Color;
 import db.mannager.*;
-import matchers.EnumMatchers;
-import webcrawler.EnumPicaretas;
+import framework.match.EnumMatchers;
+import framework.webcrawler.EnumPicaretas;
 
 import java.util.List;
 import java.awt.Font;

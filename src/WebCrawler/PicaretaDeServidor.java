@@ -2,7 +2,8 @@ package webcrawler;
 
 import org.jsoup.select.Elements;
 
-import Geral.DadosGlobais;
+import framework.DadosGlobais;
+import framework.webcrawler.Picareta;
 
 public class PicaretaDeServidor extends Picareta {
 	
