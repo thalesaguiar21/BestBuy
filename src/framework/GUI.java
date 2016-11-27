@@ -52,9 +52,9 @@ public class GUI {
 	/**
 	 * Recebe lista e atualiza textArea.
 	 */	
-	public void attTextArea(List<ServidorPublico> l){
+	public void attTextArea(List<Product> l){
 		for(int i=0; i<l.size(); i++){
-			textArea.append("Nome: "+l.get(i).getNome()+" CPF: "+l.get(i).getCpf()+"\n");
+			textArea.append("Nome: ");
 		}
 	}
 	
@@ -84,7 +84,7 @@ public class GUI {
 				//textArea.setText("Atualizando a base de dados de bolsa familia...");
 				//DadosDoSistema.getDados().getMiner().minerar(EnumPicaretas.B_FAMILIA); //Picareata de servidor
 				textArea.append("Atualizando base de dados de servidores...");
-				DadosGlobais.getDados().getMiner().minerar(EnumPicaretas.SERVIDOR); //Picareata de servidor
+				DadosGlobais.getDados().getMiner().minerar(EnumPicaretas.PROD); //Picareata de servidor
 			}
 		});
 		btnNewButton.setBounds(10, 13, 183, 25);

@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import db.mannager.PostgreSQLJDBC;
-import db.mannager.ServidorPublico;
+import db.mannager.Product;
 import framework.db.DBManager;
 import framework.match.EnumMatchers;
 import framework.match.FabricaDeMatchers;
@@ -23,7 +23,7 @@ public final class DadosGlobais {
 	
 	private static DadosGlobais dadosSis;
 	private Map<Integer, ArrayList<Float>> remPorNivel;
-	private List<ServidorPublico> ServidoresPublicos;
+	private List<Product> ServidoresPublicos;
 	private Minerador miner;
 	private Matcher matcher;
 	private DBManager myDb;
@@ -31,7 +31,7 @@ public final class DadosGlobais {
 
 	private DadosGlobais(){
 		this.remPorNivel        = new HashMap<Integer, ArrayList<Float>>();
-		this.ServidoresPublicos = new ArrayList<ServidorPublico>();
+		this.ServidoresPublicos = new ArrayList<Product>();
 		this.miner              = new Minerador();
 		this.matcher            = null;
 		this.myDb               = new PostgreSQLJDBC();
@@ -52,11 +52,11 @@ public final class DadosGlobais {
 		this.remPorNivel = remPorNivel;
 	}
 	
-	public List<ServidorPublico> getServidoresPublicos(){
+	public List<Product> getServidoresPublicos(){
 		return this.ServidoresPublicos;
 	}
 	
-	public void setServidoresPublicos(List<ServidorPublico> ServidoresPublicos){
+	public void setServidoresPublicos(List<Product> ServidoresPublicos){
 		this.ServidoresPublicos = ServidoresPublicos;
 	}
 	

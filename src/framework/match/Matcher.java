@@ -1,10 +1,10 @@
 package framework.match;
 import java.util.List;
 
-import db.mannager.ServidorPublico;
+import db.mannager.Product;
 
 public interface Matcher {
-	List<ServidorPublico> allMatchs();
-	List<ServidorPublico> matchByName(String nome);
-	List<ServidorPublico> matchByNames(List<String> nomes);
+	List<Product> allMatchs();
+	List<Product> matchByName(String nome);
+	List<Product> matchByNames(List<String> nomes);
 }
