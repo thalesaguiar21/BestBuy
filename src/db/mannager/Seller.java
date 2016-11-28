@@ -5,66 +5,62 @@ import java.util.List;
 public class Seller {
 	
 	private int id;
-	private String sellName;
-	private String sellAddr;
-	private String sellCpf;
-	private String sellContact;
-	private List<Product> sellAnounces;
+	private String name;
+	private String addr;
+	private String cpf;
+	private String contact;
+	private List<Product> anounces;
 	
-	public Seller (int id, String sellName, String sellAddr, String sellCpf, String sellContact, List<Product> sellAnounces){
+	public Seller (int id, String name, String addr, String cpf, String contact, List<Product> anounces){
 		this.id			  = id;
-		this.sellName     = sellName;
-		this.sellAddr 	  = sellAddr;
-		this.sellCpf      = sellCpf;
-		this.sellContact  = sellContact;
-		this.sellAnounces = sellAnounces;
+		this.name     = name;
+		this.addr 	  = addr;
+		this.cpf      = cpf;
+		this.contact  = contact;
+		this.anounces = anounces;
 	}
 
 	public int getId() {
 		return id;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public String getName() {
+		return name;
 	}
 
-	public String getSellName() {
-		return sellName;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public void setSellName(String sellName) {
-		this.sellName = sellName;
+	public String getAddr() {
+		return addr;
 	}
 
-	public String getSellAddr() {
-		return sellAddr;
+	public void setAddr(String addr) {
+		this.addr = addr;
 	}
 
-	public void setSellAddr(String sellAddr) {
-		this.sellAddr = sellAddr;
+	public String getCpf() {
+		return cpf;
 	}
 
-	public String getSellCpf() {
-		return sellCpf;
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
 	}
 
-	public void setSellCpf(String sellCpf) {
-		this.sellCpf = sellCpf;
+	public String getContact() {
+		return contact;
 	}
 
-	public String getSellContact() {
-		return sellContact;
+	public void setContact(String contact) {
+		this.contact = contact;
 	}
 
-	public void setSellContact(String sellContact) {
-		this.sellContact = sellContact;
+	public List<Product> getAnounces() {
+		return anounces;
 	}
 
-	public List<Product> getSellAnounces() {
-		return sellAnounces;
-	}
-
-	public void setSellAnounces(List<Product> sellAnounces) {
-		this.sellAnounces = sellAnounces;
+	public void setAnounces(List<Product> anounces) {
+		this.anounces = anounces;
 	}
 }

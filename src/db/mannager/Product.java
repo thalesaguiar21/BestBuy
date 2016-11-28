@@ -4,22 +4,22 @@ public class Product {
 	
 	private int id;
 	private int sId;
-	private String prodName;
-	private String prodCost;
-	private String prodTipo;
-	private String prodDescr;
-	private String prodUsage;
+	private String name;
+	private String cost;
+	private String tipo;
+	private String descr;
+	private String pusage;
 	private String anounceLink;
 	
-	public Product (int id, int sId, String prodName, String prodCost, String prodTipo, 
-			String prodDescr, String prodUsage, String anounceLink){
+	public Product (int id, int sId, String name, String cost, String tipo, 
+			String descr, String pusage, String anounceLink){
 		this.id          = id;
 		this.sId         = sId;
-		this.prodName    = prodName;
-		this.prodCost    = prodCost;
-		this.prodTipo    = prodTipo;
-		this.prodDescr   = prodDescr;
-		this.prodUsage   = prodUsage;
+		this.name        = name;
+		this.cost        = cost;
+		this.tipo        = tipo;
+		this.descr       = descr;
+		this.pusage      = pusage;
 		this.anounceLink = anounceLink;
 	}
 
@@ -30,53 +30,45 @@ public class Product {
 	public void setsId(int sId) {
 		this.sId = sId;
 	}
-	
-	public int getId() {
-		return id;
+
+	public String getName() {
+		return name;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public String getProdName() {
-		return prodName;
+	public String getCost() {
+		return cost;
 	}
 
-	public void setProdName(String prodName) {
-		this.prodName = prodName;
+	public void setCost(String cost) {
+		this.cost = cost;
 	}
 
-	public String getProdCost() {
-		return prodCost;
+	public String getTipo() {
+		return tipo;
 	}
 
-	public void setProdCost(String prodCost) {
-		this.prodCost = prodCost;
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
 	}
 
-	public String getProdTipo() {
-		return prodTipo;
+	public String getDescr() {
+		return descr;
 	}
 
-	public void setProdTipo(String prodTipo) {
-		this.prodTipo = prodTipo;
+	public void setDescr(String descr) {
+		this.descr = descr;
 	}
 
-	public String getProdDescr() {
-		return prodDescr;
+	public String getPusage() {
+		return pusage;
 	}
 
-	public void setProdDescr(String prodDescr) {
-		this.prodDescr = prodDescr;
-	}
-
-	public String getProdUsage() {
-		return prodUsage;
-	}
-
-	public void setProdUsage(String prodUsage) {
-		this.prodUsage = prodUsage;
+	public void setPusage(String pusage) {
+		this.pusage = pusage;
 	}
 
 	public String getAnounceLink() {
@@ -86,4 +78,9 @@ public class Product {
 	public void setAnounceLink(String anounceLink) {
 		this.anounceLink = anounceLink;
 	}
+
+	public int getId() {
+		return id;
+	}
+	
 }
