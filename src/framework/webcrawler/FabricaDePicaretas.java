@@ -5,7 +5,7 @@ public class FabricaDePicaretas {
 	public static Picareta criarPicareta(EnumPicaretas type){
 		switch (type) {
 		case PROD:
-			return null;
+			return new PicaretaDeProdutos();
 		case SELLER:
 			return null;
 		default:
