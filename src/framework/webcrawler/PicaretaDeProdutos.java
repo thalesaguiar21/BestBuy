@@ -29,13 +29,13 @@ public class PicaretaDeProdutos extends Picareta {
 					Integer.parseInt(e.attr("id")),			//id
 					0, 										//sId
 					e.attr("name"),							//name
-					e.select(".OLXad-list-price").text(),	//cost
+					e.select(".OLXad-list-price").text(),	//cost	- Pode estar vazio dependendo do tipo de item, servicos por exemplo sao, em geral, vazios
 					e.select(".detail-category").text(),	//tipo
 					e.select(".OLXad-list-title").text(),	//descr
-					e.select(".col-4 > .text").val(),		//pusage
+					e.select(".col-4 > .text").get(0).text() + " às "+ e.select(".col-4 > .text").get(1).text(),//pusage
 					e.attr("href")							//anounceLink
 				)
-			);
+			);System.out.println();
 	    	//System.out.println(e.select(query));
 	    }
 		return 1f;
