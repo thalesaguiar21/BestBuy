@@ -5,9 +5,9 @@ import java.util.List;
 import db.mannager.*;
 import framework.match.Matcher;
 
-public class BestBuyMathcer implements Matcher{
+public class BestBuyMatcher implements Matcher{
 	
-	public BestBuyMathcer() {
+	public BestBuyMatcher() {
 		
 	}
 	
