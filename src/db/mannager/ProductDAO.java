@@ -47,7 +47,7 @@ public class ProductDAO {
 	public void insert (Product prod) {
 		String ins = "INSERT INTO Product (seller_idSeller, name, cost, tipo, descr"
 				+ ", pusage, anounceLink) VALUES (" + prod.getsId() + ", '" + prod.getName() + "', '"
-				+ prod.getCost() + "', '" + prod.getDescr() + "', '" + prod.getPusage() + "', '"
+				+ prod.getCost() + "', '" + prod.getTipo() + "', '"+ prod.getDescr() + "', '" + prod.getPusage() + "', '"
 				+ prod.getAnounceLink() + "');";
 		DadosGlobais.getDados().getMyDb().update(ins);
 	}  

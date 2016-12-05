@@ -19,11 +19,14 @@ import framework.webcrawler.EnumPicaretas;
 import java.util.List;
 import java.awt.Font;
 import java.awt.SystemColor;
+import javax.swing.JTextField;
+import javax.swing.JCheckBox;
 
 public class GUI {
 
 	private JFrame frmMineradorDeCorrupo;
 	private TextArea textArea;
+	private JTextField textField;
 
 	/**
 	 * Launch the application.
@@ -53,8 +56,8 @@ public class GUI {
 	 * Recebe lista e atualiza textArea.
 	 */	
 	public void attTextArea(List<Product> l){
-		for(int i=0; i<l.size(); i++){
-			textArea.append("Nome: ");
+		for(Product j : l){
+			textArea.append("Nome do Produto: " + j.getName()+ "\nPreço: " + j.getCost() + "\nDescrição: " + j.getDescr()+"\nLink:"+j.getAnounceLink()+"\n\n");
 		}
 	}
 	
@@ -63,7 +66,7 @@ public class GUI {
 	 */
 	private void initialize() {
 		frmMineradorDeCorrupo = new JFrame();
-		frmMineradorDeCorrupo.setTitle("Minerador de corrup\u00E7\u00E3o");
+		frmMineradorDeCorrupo.setTitle("BestBuy");
 		frmMineradorDeCorrupo.setBounds(100, 100, 800, 600);
 		frmMineradorDeCorrupo.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmMineradorDeCorrupo.getContentPane().setLayout(null);
@@ -83,18 +86,25 @@ public class GUI {
 				
 				//textArea.setText("Atualizando a base de dados de bolsa familia...");
 				//DadosDoSistema.getDados().getMiner().minerar(EnumPicaretas.B_FAMILIA); //Picareata de servidor
-				textArea.append("Atualizando base de dados de servidores...");
+				textArea.append("Atualizando lista de produtos...");
 				DadosGlobais.getDados().getMiner().minerar(EnumPicaretas.PROD); //Picareata de servidor
 			}
 		});
 		btnNewButton.setBounds(10, 13, 183, 25);
 		frmMineradorDeCorrupo.getContentPane().add(btnNewButton);
 		
-		JButton btnNewButton_1 = new JButton("Buscar Irregularidades - Bolsa Fam\u00EDlia");
+		JButton btnNewButton_1 = new JButton("Buscar Item");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				DadosGlobais.getDados().setMatcher(EnumMatchers.V_B_FAMILIA);
-				attTextArea(DadosGlobais.getDados().getMatcher().allMatchs());
+				textArea.setText("");
+				DadosGlobais.getDados().setMatcher(EnumMatchers.V_BUY);
+				String produto = textField.getText();
+				if (produto.isEmpty()){
+					attTextArea(DadosGlobais.getDados().getMatcher().allMatchs());
+				}
+				else{
+					attTextArea(DadosGlobais.getDados().getMatcher().matchByName(produto));
+				}
 			}
 		});
 		btnNewButton_1.setBounds(512, 13, 260, 25);
@@ -105,15 +115,46 @@ public class GUI {
 		textArea.setFont(new Font("Courier New", Font.PLAIN, 15));
 		textArea.setForeground(Color.BLACK);
 		textArea.setEditable(false);
-		textArea.setBounds(10, 68, 762, 477);
+		textArea.setBounds(10, 132, 762, 413);
 		frmMineradorDeCorrupo.getContentPane().add(textArea);
 		
 		JLabel lblNewLabel = new JLabel("\u00DAltima atualiza\u00E7\u00E3o:");
 		lblNewLabel.setBounds(205, 17, 121, 16);
 		frmMineradorDeCorrupo.getContentPane().add(lblNewLabel);
 		
-		JLabel lblNomesDosServidores = new JLabel("Nomes dos servidores p\u00FAblicos da UFRN registrados no bolsa fam\u00EDlia:");
-		lblNomesDosServidores.setBounds(10, 46, 433, 16);
-		frmMineradorDeCorrupo.getContentPane().add(lblNomesDosServidores);
+		textField = new JTextField();
+		textField.setBounds(512, 54, 260, 26);
+		frmMineradorDeCorrupo.getContentPane().add(textField);
+		textField.setColumns(10);
+		
+		JLabel lblNomeDoProduto = new JLabel("Nome do produto:");
+		lblNomeDoProduto.setBounds(364, 57, 143, 20);
+		frmMineradorDeCorrupo.getContentPane().add(lblNomeDoProduto);
+		
+		JCheckBox chckbxNewCheckBox = new JCheckBox("Pre\u00E7o");
+		JCheckBox chckbxNome = new JCheckBox("Nome");
+		chckbxNewCheckBox.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(chckbxNome.isSelected()){
+					chckbxNome.setSelected(false);
+				}
+			}
+		});
+		chckbxNewCheckBox.setBounds(11, 86, 76, 29);
+		frmMineradorDeCorrupo.getContentPane().add(chckbxNewCheckBox);
+		
+		JLabel lblOrdenarPor = new JLabel("Ordenar por:");
+		lblOrdenarPor.setBounds(20, 67, 151, 20);
+		frmMineradorDeCorrupo.getContentPane().add(lblOrdenarPor);
+		
+		chckbxNome.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if(chckbxNewCheckBox.isSelected()){
+					chckbxNewCheckBox.setSelected(false);
+				}
+			}
+		});
+		chckbxNome.setBounds(93, 86, 139, 29);
+		frmMineradorDeCorrupo.getContentPane().add(chckbxNome);
 	}
 }

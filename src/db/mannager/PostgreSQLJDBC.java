@@ -11,9 +11,9 @@ public class PostgreSQLJDBC extends DBManager{
 	
 	public PostgreSQLJDBC() {
 		JDBC_DRIVER = "org.postgresql.Driver";
-		DB_URL = "jdbc:postgresql://localhost:5432/minerDB";
+		DB_URL = "jdbc:postgresql://localhost:5432/BestBuyDB";
 		adm_user = "postgres";
-		adm_paswd = "admin";
+		adm_paswd = "concluido";
 		connection = null;
 		stmt = null;
 	}

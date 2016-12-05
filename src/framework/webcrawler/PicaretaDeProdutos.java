@@ -27,7 +27,7 @@ public class PicaretaDeProdutos extends Picareta {
 			proddao.insert(
 				new Product(							//argumentos
 					Integer.parseInt(e.attr("id")),			//id
-					0, 										//sId
+					1, 										//sId
 					e.attr("name"),							//name
 					e.select(".OLXad-list-price").text(),	//cost	- Pode estar vazio dependendo do tipo de item, servicos por exemplo sao, em geral, vazios
 					e.select(".detail-category").text(),	//tipo

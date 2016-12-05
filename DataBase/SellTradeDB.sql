@@ -3,21 +3,21 @@
 CREATE TABLE Product (
   idProduct serial NOT NULL,
   Seller_idSeller INTEGER NOT NULL,
-  name varchar(60),
-  cost varchar(15),
-  tipo varchar(30),
-  descr varchar(150),
-  pusage varchar(30),
-  anounceLink varchar(300),
+  name varchar(550),
+  cost varchar(550),
+  tipo varchar(550),
+  descr varchar(550),
+  pusage varchar(550),
+  anounceLink varchar(550),
   CONSTRAINT Product_Pk PRIMARY KEY(idProduct)
 );
 
 CREATE TABLE Seller (
   idSeller serial NOT NULL,
-  name varchar(80) ,
-  addr varchar(100) ,
-  cpf varchar(14) ,
-  contact varchar(20) ,
+  name varchar(550) ,
+  addr varchar(550) ,
+  cpf varchar(550) ,
+  contact varchar(550) ,
   CONSTRAINT Seller_Pk PRIMARY KEY(idSeller)
 );
 
